@@ -1,0 +1,23 @@
+﻿@model PatientFilterVM
+
+<form class="row row-cols-lg-auto g-3 align-items-center">
+    <div class="form-floating mb-3 col-12">
+        <input class="form-control" asp-for="Id" />
+        <label asp-for="Id"></label>
+    </div>
+    <div class="form-floating mb-3 col-12">
+        <input class="form-control" asp-for="FullName" />
+        <label asp-for="FullName"></label>
+    </div>
+    <div class="form-floating mb-3 col-12">
+        <input class="form-control" asp-for="PhoneNumber" type="tel" />
+        <label asp-for="PhoneNumber"></label>
+    </div>
+    <div class="form-floating mb-3 col-12">
+        <input class="form-control" asp-for="NationalId" type="tel" />
+        <label asp-for="NationalId"></label>
+    </div>
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</form>

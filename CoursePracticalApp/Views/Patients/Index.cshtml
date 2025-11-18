@@ -1,0 +1,51 @@
+﻿@model PatientFilterListVM
+
+<h1>Patients</h1>
+
+<partial name="_Filter" model="Model.PatientFilterVM" />
+
+@foreach(var p in Model.patientVMs)
+{
+    <li>
+        <a asp-controller="Patients" asp-action="Details" asp-route-id="@p.Id">
+            @p.FullName
+        </a>
+        <a class="btn btn-primary btn-sm ms-3" asp-controller="Patients" asp-action="Update" asp-route-id="@p.Id">
+            <i class="bi bi-pencil-square"></i>
+        </a>
+        <a class="btn btn-danger btn-sm ms-3 js-btn-delete" data-id="@p.Id">
+            <i class="bi bi-person-x"></i>
+        </a>
+    </li>
+}
+
+<a class="btn btn-primary mt-3" asp-controller="Patients" asp-action="Register">
+    Add New Patient
+</a>
+
+<partial name="_Pagination" model="Model.PatientFilterVM"></partial>
+
+@section Scripts {
+    <script>
+        $(".js-btn-delete").on("click", function () {
+            
+            const btn = $(this);
+            const id = $(this).data("id");
+            const isConfirmed = confirm("Are you sure you want to delete this patient?");
+
+            if (isConfirmed) {
+                $.ajax({
+                    url: "Patients/Delete/" + id,
+                    success: function (result) {
+                        btn.parent("li").remove();
+                    },
+                    error: function (xhr, status, error) {
+                            alert("An error occurred while trying to delete the patient: " + error);
+                    }
+                });
+            }
+        })
+    </script>
+}
+
+

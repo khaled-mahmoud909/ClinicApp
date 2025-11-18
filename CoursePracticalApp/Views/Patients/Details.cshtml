@@ -1,0 +1,16 @@
+﻿@model PatientVM
+
+<h1>Patient Details</h1>
+
+<h5>
+    @Model.FullName
+</h5>
+<h6>
+    @Model.Email
+</h6>
+<p>
+    <strong>Date of Birth:</strong> @Model.DateOfBirth.ToShortDateString()
+</p>
+<p>
+    <strong>Phone Number:</strong> @Model.PhoneNumber
+</p>

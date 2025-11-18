@@ -1,0 +1,40 @@
+﻿@model PatientCreateVM
+
+<form method="post">
+    <h5 class="card-title">
+        Rigester Patient
+    </h5>
+    <div class="form-floating mb-3">
+        <input class="form-control" asp-for="FullName" />
+        <label asp-for="FullName"></label>
+        <span class="text-danger" asp-validation-for="FullName"></span>
+    </div>
+    <div class="form-floating mb-3">
+        <input class="form-control" asp-for="DateOfBirth" type="date" />
+        <label asp-for="DateOfBirth"></label>
+        <span class="text-danger" asp-validation-for="DateOfBirth"></span>
+    </div>
+    <div class="form-floating mb-3">
+        <input class="form-control" asp-for="Email" type="email" />
+        <label asp-for="Email"></label>
+        <span class="text-danger" asp-validation-for="Email"></span>
+    </div>
+    <div class="form-floating mb-3">
+        <input class="form-control" asp-for="PhoneNumber" type="tel" />
+        <label asp-for="PhoneNumber"></label>
+        <span class="text-danger" asp-validation-for="PhoneNumber"></span>
+    </div>
+    <div class="form-floating mb-3">
+        <input class="form-control" asp-for="NationalId" type="tel" />
+        <label asp-for="NationalId"></label>
+        <span class="text-danger" asp-validation-for="NationalId"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Register</button>
+</form>
+
+@section Scripts {
+
+    <partial name="_ValidationScriptsPartial" />
+
+}
