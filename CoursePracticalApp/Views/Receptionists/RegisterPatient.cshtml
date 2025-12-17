@@ -1,0 +1,644 @@
+﻿@model PatientCreateVM
+
+<div class="container-fluid">
+    <!-- Header -->
+    <div class="page-header mb-4">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <h4 class="mb-2 fw-bold">Register New Patient</h4>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item">
+                            <a asp-action="Dashboard">Dashboard</a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">Register Patient</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <!-- Registration Form -->
+        <div class="col-12 col-lg-8">
+            <div class="registration-form-card">
+                <div class="card-header">
+                    <h5 class="mb-0 fw-bold">
+                        <i class="bi bi-person-plus me-2"></i>
+                        Patient Information
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <form id="patientRegistrationForm" method="post">
+                        <!-- Personal Information Section -->
+                        <div class="form-section">
+                            <div class="section-header">
+                                <span class="section-number">1</span>
+                                <h6 class="section-title">Personal Information</h6>
+                            </div>
+                            
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label asp-for="FirstName" class="form-label fw-semibold"></label>
+                                    <span class="text-danger">*</span>
+                                    <input type="text" 
+                                           class="form-control form-control-lg" 
+                                           asp-for="FirstName"
+                                           placeholder="Enter First name" />
+                                    <span class="text-danger" asp-validation-for="FirstName"></span>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label asp-for="LastName" class="form-label fw-semibold"></label>
+                                    <span class="text-danger">*</span>
+                                    <input type="text"
+                                           class="form-control form-control-lg"
+                                           asp-for="LastName"
+                                           placeholder="Enter Last name" />
+                                    <span class="text-danger" asp-validation-for="LastName"></span>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label asp-for="DateOfBirth" class="form-label fw-semibold"></label>
+                                    <span class="text-danger">*</span>
+                                    <input type="date"
+                                           asp-for="DateOfBirth"
+                                           class="form-control form-control-lg" />
+                                    <div class="form-text">
+                                        <i class="bi bi-info-circle me-1"></i>
+                                        Age will be calculated automatically
+                                    </div>
+                                    <span class="text-danger" asp-validation-for="DateOfBirth"></span>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label asp-for="Gender" class="form-label fw-semibold"></label>
+                                    <span class="text-danger">*</span>
+                                    <select class="form-select form-select-lg" asp-for="Gender">
+                                        <option value="">Select gender...</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                    </select>
+                                    <span class="text-danger" asp-validation-for="Gender"></span>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label asp-for="NationalId" class="form-label fw-semibold"></label>
+                                    <span class="text-danger">*</span>
+                                    <input type="text" 
+                                           class="form-control form-control-lg" 
+                                           asp-for="NationalId"
+                                           placeholder="Enter ID number" />
+                                    <span class="text-danger" asp-validation-for="NationalId"></span>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label asp-for="BloodGroup" class="form-label fw-semibold"></label>
+                                    <span class="text-muted">(Optional)</span>
+                                    <select class="form-select form-select-lg" asp-for="BloodGroup">
+                                        <option value="">Select blood group...</option>
+                                        <option value="A+">A+</option>
+                                        <option value="A-">A-</option>
+                                        <option value="B+">B+</option>
+                                        <option value="B-">B-</option>
+                                        <option value="AB+">AB+</option>
+                                        <option value="AB-">AB-</option>
+                                        <option value="O+">O+</option>
+                                        <option value="O-">O-</option>
+                                    </select>
+                                    <span class="text-danger" asp-validation-for="BloodGroup"></span>
+                                </div>
+                                
+                            </div>
+                        </div>
+
+                        <hr class="my-4">
+
+                        <!-- Contact Information Section -->
+                        <div class="form-section">
+                            <div class="section-header">
+                                <span class="section-number">2</span>
+                                <h6 class="section-title">Contact Information</h6>
+                            </div>
+                            
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label asp-for="Email" class="form-label fw-semibold"></label>
+                                    <span class="text-danger">*</span>
+                                    <div class="input-icon-wrapper">
+                                        <i class="bi bi-envelope input-icon"></i>
+                                        <input type="email" 
+                                               class="form-control form-control-lg ps-5" 
+                                               asp-for="Email"
+                                               placeholder="patient@example.com" />
+                                    </div>
+                                    <span class="text-danger" asp-validation-for="Email"></span>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label asp-for="PhoneNumber" class="form-label fw-semibold"></label>
+                                    <span class="text-danger">*</span>
+                                    <div class="input-icon-wrapper">
+                                        <i class="bi bi-telephone input-icon"></i>
+                                        <input type="tel" 
+                                               class="form-control form-control-lg ps-5" 
+                                               asp-for="PhoneNumber"
+                                               placeholder="+1 234 567 8900" />
+                                    </div>
+                                    <span class="text-danger" asp-validation-for="PhoneNumber"></span>
+                                </div>
+
+                                @* <div class="col-12">
+                                    <label for="address" class="form-label fw-semibold">
+                                        Address <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" 
+                                           class="form-control form-control-lg" 
+                                           id="address" 
+                                           placeholder="Street address"
+                                           required>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label for="city" class="form-label fw-semibold">
+                                        City <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" 
+                                           class="form-control form-control-lg" 
+                                           id="city" 
+                                           placeholder="Enter city"
+                                           required>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label for="state" class="form-label fw-semibold">
+                                        State/Province <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" 
+                                           class="form-control form-control-lg" 
+                                           id="state" 
+                                           placeholder="Enter state"
+                                           required>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label for="zipCode" class="form-label fw-semibold">
+                                        ZIP Code <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" 
+                                           class="form-control form-control-lg" 
+                                           id="zipCode" 
+                                           placeholder="Enter ZIP"
+                                           required>
+                                </div> *@
+                            </div>
+                        </div>
+
+                        <hr class="my-4">
+
+                        <!-- Emergency Contact Section -->
+                        <div class="form-section">
+                            <div class="section-header">
+                                <span class="section-number">3</span>
+                                <h6 class="section-title">Emergency Contact</h6>
+                            </div>
+                            
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label asp-for="EmgContactName" class="form-label fw-semibold"></label>
+                                    <span class="text-danger">*</span>
+                                    <input type="text" 
+                                           class="form-control form-control-lg" 
+                                           asp-for="EmgContactName"
+                                           placeholder="Full name" />
+                                    <span class="text-danger" asp-validation-for="EmgContactName"></span>
+                                </div>
+
+@*                                 <div class="col-md-6">
+                                    <label for="emergencyRelation" class="form-label fw-semibold">
+                                        Relationship <span class="text-danger">*</span>
+                                    </label>
+                                    <select class="form-select form-select-lg" id="emergencyRelation" required>
+                                        <option value="">Select relationship...</option>
+                                        <option value="spouse">Spouse</option>
+                                        <option value="parent">Parent</option>
+                                        <option value="sibling">Sibling</option>
+                                        <option value="child">Child</option>
+                                        <option value="friend">Friend</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div> *@
+
+                                <div class="col-md-6">
+                                    <label asp-for="EmgContactPhone" class="form-label fw-semibold"></label>
+                                    <span class="text-danger">*</span>
+                                    <div class="input-icon-wrapper">
+                                        <i class="bi bi-telephone input-icon"></i>
+                                        <input type="tel" 
+                                               class="form-control form-control-lg ps-5" 
+                                               asp-for="EmgContactPhone"
+                                               placeholder="+1 234 567 8900" />
+                                    </div>
+                                    <span class="text-danger" asp-validation-for="EmgContactPhone"></span>
+                                </div>
+
+@*                                 <div class="col-md-6">
+                                    <label for="emergencyEmail" class="form-label fw-semibold">
+                                        Contact Email <span class="text-muted">(Optional)</span>
+                                    </label>
+                                    <div class="input-icon-wrapper">
+                                        <i class="bi bi-envelope input-icon"></i>
+                                        <input type="email" 
+                                               class="form-control form-control-lg ps-5" 
+                                               id="emergencyEmail" 
+                                               placeholder="contact@example.com">
+                                    </div>
+                                </div> *@
+                            </div>
+                        </div>
+
+                        <hr class="my-4">
+
+                        <!-- Medical Information Section -->
+@*                         <div class="form-section">
+                            <div class="section-header">
+                                <span class="section-number">4</span>
+                                <h6 class="section-title">Medical Information</h6>
+                            </div>
+                            
+                            <div class="row g-3">
+                                <div class="col-12">
+                                    <label for="allergies" class="form-label fw-semibold">
+                                        Known Allergies <span class="text-muted">(Optional)</span>
+                                    </label>
+                                    <textarea class="form-control" 
+                                              id="allergies" 
+                                              rows="3" 
+                                              placeholder="List any known allergies (e.g., medications, food, environmental)"></textarea>
+                                    <div class="form-text">
+                                        <i class="bi bi-exclamation-triangle me-1"></i>
+                                        Please list all known allergies for patient safety
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <label for="chronicConditions" class="form-label fw-semibold">
+                                        Chronic Conditions <span class="text-muted">(Optional)</span>
+                                    </label>
+                                    <textarea class="form-control" 
+                                              id="chronicConditions" 
+                                              rows="3" 
+                                              placeholder="List any chronic conditions (e.g., diabetes, hypertension, asthma)"></textarea>
+                                </div>
+
+                                <div class="col-12">
+                                    <label for="currentMedications" class="form-label fw-semibold">
+                                        Current Medications <span class="text-muted">(Optional)</span>
+                                    </label>
+                                    <textarea class="form-control" 
+                                              id="currentMedications" 
+                                              rows="3" 
+                                              placeholder="List any medications currently being taken"></textarea>
+                                </div>
+
+                                <div class="col-12">
+                                    <label for="additionalNotes" class="form-label fw-semibold">
+                                        Additional Notes <span class="text-muted">(Optional)</span>
+                                    </label>
+                                    <textarea class="form-control" 
+                                              id="additionalNotes" 
+                                              rows="3" 
+                                              placeholder="Any other relevant medical information"></textarea>
+                                </div>
+                            </div>
+                        </div> *@
+
+                        <hr class="my-4">
+
+                        <!-- Insurance Information Section (Optional) -->
+                        <div class="form-section">
+                            <div class="section-header">
+                                <span class="section-number">5</span>
+                                <h6 class="section-title">Insurance Information</h6>
+                            </div>
+                            
+                            <div class="form-check mb-3">
+                                <input class="form-check-input" type="checkbox" asp-for="HasInsurance">
+                                <label class="form-check-label fw-semibold" asp-for="HasInsurance">
+                                    Patient has insurance coverage
+                                </label>
+                                <span class="text-danger" asp-validation-for="HasInsurance"></span>
+                            </div>
+
+                            <div id="insuranceFields" class="d-none">
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label asp-for="InsuranceProvider" class="form-label fw-semibold"></label>
+                                        <input type="text" 
+                                               class="form-control form-control-lg" 
+                                               asp-for="InsuranceProvider"
+                                               placeholder="Enter provider name">
+                                        <span class="text-danger" asp-validation-for="InsuranceProvider"></span>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label asp-for="InsuranceNumber" class="form-label fw-semibold"></label>
+                                        <input type="text" 
+                                               class="form-control form-control-lg" 
+                                               asp-for="InsuranceNumber"
+                                               placeholder="Enter policy number">
+                                        <span class="text-danger" asp-validation-for="InsuranceNumber"></span>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label asp-for="ValidFrom" class="form-label fw-semibold"></label>
+                                        <input type="date" 
+                                               class="form-control form-control-lg" 
+                                               asp-for="ValidFrom" />
+                                        <span class="text-danger" asp-validation-for="ValidFrom"></span>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label asp-for="ValidTo" class="form-label fw-semibold"></label>
+                                        <input type="date" 
+                                               class="form-control form-control-lg" 
+                                               asp-for="ValidTo" />
+                                        <span class="text-danger" asp-validation-for="ValidTo"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr class="my-4">
+
+                        <!-- Consent & Terms -->
+                        <div class="form-section">
+                            <div class="consent-box">
+                                <h6 class="consent-title">
+                                    <i class="bi bi-shield-check me-2"></i>
+                                    Consent & Agreement
+                                </h6>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox" asp-for="HasConsentData">
+                                    <label class="form-check-label" asp-for="HasConsentData">
+                                        I confirm that the patient consents to the collection and processing of their personal and medical data
+                                    </label>
+                                    <span class="text-danger" asp-validation-for="HasConsentData"></span>
+                                </div>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox" asp-for="HasConsentTreatment">
+                                    <label class="form-check-label" asp-for="HasConsentTreatment">
+                                        I confirm that the patient consents to medical treatment at this facility
+                                    </label>
+                                    <span class="text-danger" asp-validation-for="HasConsentTreatment"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+
+                        <!-- Form Actions -->
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-outline-secondary btn-lg">
+                                <i class="bi bi-x-circle me-2"></i>
+                                Cancel
+                            </button>
+                            <button type="button" class="btn btn-outline-primary btn-lg">
+                                <i class="bi bi-floppy me-2"></i>
+                                Save as Draft
+                            </button>
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="bi bi-check-circle me-2"></i>
+                                Register Patient
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar: Guidelines & Summary -->
+        <div class="col-12 col-lg-4">
+            <!-- Registration Guidelines -->
+            <div class="guidelines-card mb-4">
+                <div class="card-header">
+                    <h6 class="mb-0 fw-bold">
+                        <i class="bi bi-journal-text me-2"></i>
+                        Registration Guidelines
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="guideline-item">
+                        <div class="guideline-icon">
+                            <i class="bi bi-1-circle-fill"></i>
+                        </div>
+                        <div class="guideline-content">
+                            <h6 class="guideline-title">Verify Identity</h6>
+                            <p class="guideline-text">Ensure you have a valid ID document for verification</p>
+                        </div>
+                    </div>
+
+                    <div class="guideline-item">
+                        <div class="guideline-icon">
+                            <i class="bi bi-2-circle-fill"></i>
+                        </div>
+                        <div class="guideline-content">
+                            <h6 class="guideline-title">Complete Contact Info</h6>
+                            <p class="guideline-text">Accurate contact details are essential for follow-ups</p>
+                        </div>
+                    </div>
+
+                    <div class="guideline-item">
+                        <div class="guideline-icon">
+                            <i class="bi bi-3-circle-fill"></i>
+                        </div>
+                        <div class="guideline-content">
+                            <h6 class="guideline-title">Emergency Contact</h6>
+                            <p class="guideline-text">Always collect emergency contact information</p>
+                        </div>
+                    </div>
+
+@*                     <div class="guideline-item">
+                        <div class="guideline-icon">
+                            <i class="bi bi-4-circle-fill"></i>
+                        </div>
+                        <div class="guideline-content">
+                            <h6 class="guideline-title">Medical History</h6>
+                            <p class="guideline-text">Document allergies and chronic conditions carefully</p>
+                        </div>
+                    </div *@
+
+                    <div class="guideline-item">
+                        <div class="guideline-icon">
+                            <i class="bi bi-4-circle-fill"></i>
+                        </div>
+                        <div class="guideline-content">
+                            <h6 class="guideline-title">Get Consent</h6>
+                            <p class="guideline-text">Ensure all consent forms are properly signed</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Required Documents -->
+            <div class="documents-card mb-4">
+                <div class="card-header">
+                    <h6 class="mb-0 fw-bold">
+                        <i class="bi bi-file-earmark-check me-2"></i>
+                        Required Documents
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <ul class="documents-list">
+                        <li>
+                            <i class="bi bi-check-circle text-success"></i>
+                            Valid government-issued ID or passport
+                        </li>
+@*                         <li>
+                            <i class="bi bi-check-circle text-success"></i>
+                            Proof of address (utility bill, bank statement)
+                        </li> *@
+                        <li>
+                            <i class="bi bi-check-circle text-success"></i>
+                            Insurance card (if applicable)
+                        </li>
+                        <li>
+                            <i class="bi bi-check-circle text-success"></i>
+                            Previous medical records (if available)
+                        </li>
+                        <li>
+                            <i class="bi bi-check-circle text-success"></i>
+                            Referral letter (if applicable)
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="quick-actions-sidebar">
+                <h6 class="mb-3 fw-bold">
+                    <i class="bi bi-lightning-charge me-2"></i>
+                    After Registration
+                </h6>
+                <a href="#" class="action-link">
+                    <i class="bi bi-calendar-plus"></i>
+                    <span>Book First Appointment</span>
+                    <i class="bi bi-arrow-right ms-auto"></i>
+                </a>
+                <a href="#" class="action-link">
+                    <i class="bi bi-file-earmark-medical"></i>
+                    <span>Add Medical Records</span>
+                    <i class="bi bi-arrow-right ms-auto"></i>
+                </a>
+                <a href="#" class="action-link">
+                    <i class="bi bi-printer"></i>
+                    <span>Print Patient Card</span>
+                    <i class="bi bi-arrow-right ms-auto"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <partial name="_Toast" />
+</div>
+
+@section Scripts {
+
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        // Show/hide insurance fields
+        document.getElementById('HasInsurance').addEventListener('change', function() {
+            const insuranceFields = document.getElementById('insuranceFields');
+            if (this.checked) {
+                insuranceFields.classList.remove('d-none');
+                insuranceFields.value = true;
+            } else {
+                insuranceFields.classList.add('d-none');
+            }
+        });
+
+        // Calculate age from date of birth
+        document.getElementById('DateOfBirth').addEventListener('change', function() {
+            const dob = new Date(this.value);
+            const today = new Date();
+            let age = today.getFullYear() - dob.getFullYear();
+            const monthDiff = today.getMonth() - dob.getMonth();
+            
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
+                age--;
+            }
+            
+            console.log('Patient age:', age);
+            // You can display this age somewhere if needed
+        });
+
+        // Form submission
+        // document.getElementById('patientRegistrationForm').addEventListener('submit', function(e) {
+        //     e.preventDefault();
+            
+        //     // Validate required consents
+        //     const consentData = document.getElementById('consentData').checked;
+        //     const consentTreatment = document.getElementById('consentTreatment').checked;
+            
+        //     if (!consentData || !consentTreatment) {
+        //         alert('Please check all required consent boxes');
+        //         return;
+        //     }
+            
+        //     // Validate form
+        //     if (this.checkValidity()) {
+        //         alert('Patient registered successfully!');
+        //         // Here you would send the data to your backend
+        //         // this.submit();
+        //     } else {
+        //         alert('Please fill in all required fields');
+        //     }
+        // });
+
+        // Save as draft functionality
+        document.querySelector('.btn-outline-primary').addEventListener('click', function() {
+            // Save form data to localStorage or send to backend
+            alert('Patient information saved as draft');
+        });
+
+        // Cancel button
+        document.querySelector('.btn-outline-secondary').addEventListener('click', function() {
+            if (confirm('Are you sure you want to cancel? All unsaved data will be lost.')) {
+                window.location.href = '/Receptionists/Dashboard';
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+        // Success Toast
+        var successToastEl = document.getElementById('successToast');
+        if (successToastEl) {
+            var successToast = new bootstrap.Toast(successToastEl, {
+                autohide: true,
+                delay: 5000
+            });
+            successToast.show();
+        }
+
+        // Error Toast
+        var errorToastEl = document.getElementById('errorToast');
+        if (errorToastEl) {
+            var errorToast = new bootstrap.Toast(errorToastEl, {
+                autohide: true,
+                delay: 6000
+            });
+            errorToast.show();
+        }
+
+        // Info Toast
+        var infoToastEl = document.getElementById('infoToast');
+        if (infoToastEl) {
+            var infoToast = new bootstrap.Toast(infoToastEl, {
+                autohide: true,
+                delay: 4000
+            });
+            infoToast.show();
+        }
+    });
+
+    </script>
+}

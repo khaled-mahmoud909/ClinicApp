@@ -1,0 +1,141 @@
+﻿@* @model UserManagementVM
+@{
+    ViewData["Title"] = "User Management";
+} *@
+@model AddUserVM
+<div class="container-fluid">
+    <!-- Header Section -->
+    <div class="page-header mb-4">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <h4 class="mb-2 fw-bold">User Management</h4>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">User Management</li>
+                    </ol>
+                </nav>
+            </div>
+            <div>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">
+                    <i class="bi bi-person-plus me-2"></i>
+                    Add New User
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Statistics Cards -->
+    <partial name="_UserStatCards" />
+
+    <!-- Filters and Search Section -->
+    <div class="users-table-card">
+        
+        <partial name="_FilterUsers" />
+
+        <div class="card-body p-0">
+            <!-- Users Table -->
+            
+            <partial name="_UsersTable" />
+
+            <!-- Bulk Actions -->
+            <div class="table-footer">
+                <div class="bulk-actions">
+                    <button class="btn btn-sm btn-outline-danger" id="bulkDeactivate" disabled>
+                        <i class="bi bi-x-circle me-1"></i>
+                        Deactivate Selected
+                    </button>
+                    <button class="btn btn-sm btn-outline-success" id="bulkActivate" disabled>
+                        <i class="bi bi-check-circle me-1"></i>
+                        Activate Selected
+                    </button>
+                </div>
+
+                <!-- Pagination -->
+
+                <partial name="_Pagination" />
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add User Modal -->
+
+<partial name="_AddUser" model="Model" />
+
+@section Scripts {
+
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        // Show/hide doctor fields based on role selection
+        document.querySelectorAll('input[name="UserRole"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                const doctorFields = document.getElementById('doctorFields');
+                if (this.value === 'Doctor') {
+                    doctorFields.style.display = 'block';
+                    document.getElementById('specialty').setAttribute('required', 'required');
+                } else {
+                    doctorFields.style.display = 'none';
+                    document.getElementById('specialty').removeAttribute('required');
+                }
+            });
+        });
+
+        // Select all checkbox functionality
+        document.getElementById('selectAll').addEventListener('change', function() {
+            const checkboxes = document.querySelectorAll('.user-checkbox');
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = this.checked;
+            });
+            updateBulkActions();
+        });
+
+        // Individual checkbox change
+        document.querySelectorAll('.user-checkbox').forEach(checkbox => {
+            checkbox.addEventListener('change', updateBulkActions);
+        });
+
+        function updateBulkActions() {
+            const checkedBoxes = document.querySelectorAll('.user-checkbox:checked');
+            const bulkButtons = document.querySelectorAll('#bulkDeactivate, #bulkActivate');
+
+            bulkButtons.forEach(btn => {
+                btn.disabled = checkedBoxes.length === 0;
+            });
+        }
+
+        // Clear filters
+        document.getElementById('clearFilters').addEventListener('click', function() {
+            document.getElementById('searchInput').value = '';
+            document.getElementById('roleFilter').selectedIndex = 0;
+            document.getElementById('statusFilter').selectedIndex = 0;
+        });
+
+        // Show user rows for demo (remove when you have actual data)
+        document.querySelectorAll('.user-row').forEach(row => {
+            row.classList.remove('d-none');
+        });
+        document.querySelector('.empty-state').classList.add('d-none');
+
+
+        $(".js-btn-createUser").on("click", function() {
+            const isConfirmed = confirm("Are you sure you want to create this user?");
+            if (isConfirmed) {
+                $.ajax({
+                    url: "/Admins/CreateUser",
+                    type: "POST",
+                    data: $("#create-user-form").serialize(),
+                    success: function (result) {
+                        alert("User created successfully!");
+                    },
+                    Error: function (xhr, status, error) {
+                        alert("An error occurred while trying to create the user: " + error);
+                    },
+                })
+            }
+        })
+
+
+    </script>
+}

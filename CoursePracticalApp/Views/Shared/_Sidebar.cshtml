@@ -1,0 +1,56 @@
+﻿<div class="sidebar-container">
+    <!-- Logo/Brand Section -->
+    <a class="sidebar-brand" href="#" style="text-decoration:none">
+        <div class="brand-icon">
+            <span class="text-white fw-bold fs-5">H</span>
+        </div>
+        <div class="brand-text">
+            <div class="brand-title">HealthCare Clinic</div>
+            <div class="brand-subtitle">Appointment Management</div>
+        </div>
+    </a>
+
+    <hr class="sidebar-divider">
+
+    <!-- Navigation Menu -->
+    <nav class="sidebar-nav">
+        <ul class="nav nav-pills flex-column mb-auto">
+            @{if (User.IsInRole(AppRoles.APP_ADMIN.ToString()))
+            {
+                @foreach(var option in SidebarMenu.AdminMenu)
+                {
+                    <li class="nav-item">
+                        <a asp-controller="Admins" asp-action="@option.action" class="nav-link" aria-current="page">
+                            <i class="@(option.Icon) nav-icon"></i>
+                            <span class="nav-text">@option.Name</span>
+                        </a>
+                    </li>
+                }
+            }
+            else if (User.IsInRole(AppRoles.RECEPTIONEST.ToString()))
+            {
+                @foreach(SidebarOption option in SidebarMenu.ReceptionistMenu)
+                {
+                    <li class="nav-item">
+                        <a asp-controller="Receptionists" asp-action="@option.action" class="nav-link" aria-current="page">
+                            <i class="@(option.Icon) nav-icon"></i>
+                            <span class="nav-text">@option.Name</span>
+                        </a>
+                    </li>
+                }
+            }
+            else
+            {
+                @foreach(SidebarOption option in SidebarMenu.DoctorMenu)
+                {
+                    <li class="nav-item">
+                        <a asp-controller="Doctors" asp-action="@option.action" class="nav-link" aria-current="page">
+                            <i class="@(option.Icon) nav-icon"></i>
+                            <span class="nav-text">@option.Name</span>
+                        </a>
+                    </li>
+                }
+            }}
+        </ul>
+    </nav>
+</div>

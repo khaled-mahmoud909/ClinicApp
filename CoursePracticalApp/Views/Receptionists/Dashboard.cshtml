@@ -1,0 +1,409 @@
+﻿<div class="container-fluid">
+    <!-- Header -->
+    <div class="dashboard-header mb-4">
+        <div>
+            <h4 class="mb-2 fw-bold">Receptionist Dashboard</h4>
+            <h6 class="text-muted mb-1">Welcome back, <span class="text-dark fw-semibold">@User.GetFormattedName()</span></h6>
+            <span class="badge bg-light text-dark border">
+                <i class="bi bi-calendar-day me-1"></i>
+                @DateTime.Now.ToString("dddd, MMMM dd, yyyy")
+            </span>
+        </div>
+    </div>
+
+    <!-- Quick Stats Row -->
+    <div class="row g-4 mb-4">
+        <!-- Today's Appointments -->
+        <div class="col-12 col-sm-6 col-xl-3">
+            <div class="stat-card position-relative">
+                <div class="card-body">
+                    <h6 class="card-title text-muted mb-3">Today's Appointments</h6>
+                    <h2 class="mb-0 fw-bold">12</h2>
+                    <p class="text-muted small mb-0 mt-2">
+                        <i class="bi bi-calendar-day me-1"></i>
+                        <span>Scheduled for today</span>
+                    </p>
+                </div>
+                <div class="icon-overlay" style="background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);">
+                    <i class="bi bi-calendar-check"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pending Confirmations -->
+        <div class="col-12 col-sm-6 col-xl-3">
+            <div class="stat-card position-relative">
+                <div class="card-body">
+                    <h6 class="card-title text-muted mb-3">Pending Confirmations</h6>
+                    <h2 class="mb-0 fw-bold">5</h2>
+                    <p class="text-muted small mb-0 mt-2">
+                        <i class="bi bi-clock-history me-1 text-warning"></i>
+                        <span>Awaiting confirmation</span>
+                    </p>
+                </div>
+                <div class="icon-overlay" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);">
+                    <i class="bi bi-hourglass-split"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Completed Today -->
+        <div class="col-12 col-sm-6 col-xl-3">
+            <div class="stat-card position-relative">
+                <div class="card-body">
+                    <h6 class="card-title text-muted mb-3">Completed Today</h6>
+                    <h2 class="mb-0 fw-bold">8</h2>
+                    <p class="text-muted small mb-0 mt-2">
+                        <i class="bi bi-check-circle me-1 text-success"></i>
+                        <span>Successfully finished</span>
+                    </p>
+                </div>
+                <div class="icon-overlay" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">
+                    <i class="bi bi-check-circle"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Total Patients -->
+        <div class="col-12 col-sm-6 col-xl-3">
+            <div class="stat-card position-relative">
+                <div class="card-body">
+                    <h6 class="card-title text-muted mb-3">Total Patients</h6>
+                    <h2 class="mb-0 fw-bold">156</h2>
+                    <p class="text-muted small mb-0 mt-2">
+                        <i class="bi bi-people me-1"></i>
+                        <span>Registered patients</span>
+                    </p>
+                </div>
+                <div class="icon-overlay" style="background: linear-gradient(135deg, #6d54d4 0%, #5a45b8 100%);">
+                    <i class="bi bi-people"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions Row -->
+    <div class="row g-4 mb-4">
+        <div class="col-12">
+            <div class="quick-actions-receptionist">
+                <h5 class="mb-3 fw-bold">
+                    <i class="bi bi-lightning-charge-fill me-2" style="color: #6d54d4;"></i>
+                    Quick Actions
+                </h5>
+                <div class="actions-grid">
+                    <a href="#" class="action-card">
+                        <div class="action-icon" style="background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);">
+                            <i class="bi bi-calendar-plus"></i>
+                        </div>
+                        <div class="action-content">
+                            <div class="action-title">Book Appointment</div>
+                            <div class="action-description">Schedule a new patient visit</div>
+                        </div>
+                        <i class="bi bi-arrow-right action-arrow"></i>
+                    </a>
+
+                    <a href="#" class="action-card">
+                        <div class="action-icon" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">
+                            <i class="bi bi-person-plus"></i>
+                        </div>
+                        <div class="action-content">
+                            <div class="action-title">Register Patient</div>
+                            <div class="action-description">Add a new patient to the system</div>
+                        </div>
+                        <i class="bi bi-arrow-right action-arrow"></i>
+                    </a>
+
+                    <a href="#" class="action-card">
+                        <div class="action-icon" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);">
+                            <i class="bi bi-search"></i>
+                        </div>
+                        <div class="action-content">
+                            <div class="action-title">Search Patient</div>
+                            <div class="action-description">Find patient records quickly</div>
+                        </div>
+                        <i class="bi bi-arrow-right action-arrow"></i>
+                    </a>
+
+                    <a href="#" class="action-card">
+                        <div class="action-icon" style="background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);">
+                            <i class="bi bi-calendar-week"></i>
+                        </div>
+                        <div class="action-content">
+                            <div class="action-title">View Schedule</div>
+                            <div class="action-description">Check today's appointments</div>
+                        </div>
+                        <i class="bi bi-arrow-right action-arrow"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Today's Schedule -->
+    <div class="row g-4 mb-4">
+        <div class="col-12 col-lg-8">
+            <div class="schedule-card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <div>
+                        <h5 class="mb-1 fw-bold">
+                            <i class="bi bi-calendar-day text-primary me-2"></i>
+                            Today's Appointments
+                        </h5>
+                        <p class="text-muted small mb-0">@DateTime.Now.ToString("dddd, MMMM dd, yyyy")</p>
+                    </div>
+                    <span class="badge bg-primary-subtle text-primary">12 Total</span>
+                </div>
+                <div class="card-body p-0">
+                    <!-- Appointments Timeline -->
+                    <div class="appointments-timeline">
+                        <!-- Appointment Item -->
+                        <div class="timeline-item">
+                            <div class="timeline-time">
+                                <span class="time-hour">09:00</span>
+                                <span class="time-period">AM</span>
+                            </div>
+                            <div class="timeline-content">
+                                <div class="d-flex justify-content-between align-items-start mb-2">
+                                    <div>
+                                        <h6 class="mb-1">John Doe</h6>
+                                        <p class="text-muted small mb-0">
+                                            <i class="bi bi-person-badge me-1"></i>
+                                            Dr. Sarah Johnson - Cardiology
+                                        </p>
+                                    </div>
+                                    <span class="badge bg-success-subtle text-success">Confirmed</span>
+                                </div>
+                                <div class="timeline-meta">
+                                    <span class="meta-item">
+                                        <i class="bi bi-telephone"></i>
+                                        +1 234 567 8900
+                                    </span>
+                                    <span class="meta-item">
+                                        <i class="bi bi-clock"></i>
+                                        30 minutes
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-time">
+                                <span class="time-hour">10:30</span>
+                                <span class="time-period">AM</span>
+                            </div>
+                            <div class="timeline-content">
+                                <div class="d-flex justify-content-between align-items-start mb-2">
+                                    <div>
+                                        <h6 class="mb-1">Jane Smith</h6>
+                                        <p class="text-muted small mb-0">
+                                            <i class="bi bi-person-badge me-1"></i>
+                                            Dr. Michael Brown - Dermatology
+                                        </p>
+                                    </div>
+                                    <span class="badge bg-warning-subtle text-warning">Pending</span>
+                                </div>
+                                <div class="timeline-meta">
+                                    <span class="meta-item">
+                                        <i class="bi bi-telephone"></i>
+                                        +1 234 567 8901
+                                    </span>
+                                    <span class="meta-item">
+                                        <i class="bi bi-clock"></i>
+                                        45 minutes
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-time">
+                                <span class="time-hour">02:00</span>
+                                <span class="time-period">PM</span>
+                            </div>
+                            <div class="timeline-content">
+                                <div class="d-flex justify-content-between align-items-start mb-2">
+                                    <div>
+                                        <h6 class="mb-1">Emily Davis</h6>
+                                        <p class="text-muted small mb-0">
+                                            <i class="bi bi-person-badge me-1"></i>
+                                            Dr. Sarah Johnson - Follow-up
+                                        </p>
+                                    </div>
+                                    <span class="badge bg-success-subtle text-success">Confirmed</span>
+                                </div>
+                                <div class="timeline-meta">
+                                    <span class="meta-item">
+                                        <i class="bi bi-telephone"></i>
+                                        +1 234 567 8902
+                                    </span>
+                                    <span class="meta-item">
+                                        <i class="bi bi-clock"></i>
+                                        30 minutes
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-time">
+                                <span class="time-hour">03:30</span>
+                                <span class="time-period">PM</span>
+                            </div>
+                            <div class="timeline-content">
+                                <div class="d-flex justify-content-between align-items-start mb-2">
+                                    <div>
+                                        <h6 class="mb-1">Robert Wilson</h6>
+                                        <p class="text-muted small mb-0">
+                                            <i class="bi bi-person-badge me-1"></i>
+                                            Dr. Lisa Anderson - Pediatrics
+                                        </p>
+                                    </div>
+                                    <span class="badge bg-success-subtle text-success">Confirmed</span>
+                                </div>
+                                <div class="timeline-meta">
+                                    <span class="meta-item">
+                                        <i class="bi bi-telephone"></i>
+                                        +1 234 567 8903
+                                    </span>
+                                    <span class="meta-item">
+                                        <i class="bi bi-clock"></i>
+                                        60 minutes
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- View More -->
+                    <div class="card-footer text-center">
+                        <a href="#" class="btn btn-link text-primary">
+                            View All Appointments
+                            <i class="bi bi-arrow-right ms-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Available Doctors & Recent Activity -->
+        <div class="col-12 col-lg-4">
+            <!-- Available Doctors -->
+            <div class="doctors-card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0 fw-bold">
+                        <i class="bi bi-person-badge text-success me-2"></i>
+                        Available Doctors
+                    </h5>
+                </div>
+                <div class="card-body p-0">
+                    <div class="doctors-list">
+                        <div class="doctor-item">
+                            <div class="doctor-avatar">
+                                <i class="bi bi-person-circle"></i>
+                            </div>
+                            <div class="doctor-info">
+                                <div class="doctor-name">Dr. Sarah Johnson</div>
+                                <div class="doctor-specialty">Cardiology</div>
+                            </div>
+                            <span class="status-indicator status-available"></span>
+                        </div>
+
+                        <div class="doctor-item">
+                            <div class="doctor-avatar">
+                                <i class="bi bi-person-circle"></i>
+                            </div>
+                            <div class="doctor-info">
+                                <div class="doctor-name">Dr. Michael Brown</div>
+                                <div class="doctor-specialty">Dermatology</div>
+                            </div>
+                            <span class="status-indicator status-available"></span>
+                        </div>
+
+                        <div class="doctor-item">
+                            <div class="doctor-avatar">
+                                <i class="bi bi-person-circle"></i>
+                            </div>
+                            <div class="doctor-info">
+                                <div class="doctor-name">Dr. Lisa Anderson</div>
+                                <div class="doctor-specialty">Pediatrics</div>
+                            </div>
+                            <span class="status-indicator status-busy"></span>
+                        </div>
+
+                        <div class="doctor-item">
+                            <div class="doctor-avatar">
+                                <i class="bi bi-person-circle"></i>
+                            </div>
+                            <div class="doctor-info">
+                                <div class="doctor-name">Dr. James Wilson</div>
+                                <div class="doctor-specialty">Orthopedics</div>
+                            </div>
+                            <span class="status-indicator status-available"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="activity-card">
+                <div class="card-header">
+                    <h5 class="mb-0 fw-bold">
+                        <i class="bi bi-clock-history text-info me-2"></i>
+                        Recent Activity
+                    </h5>
+                </div>
+                <div class="card-body p-0">
+                    <div class="activity-list-receptionist">
+                        <div class="activity-item-receptionist">
+                            <div class="activity-icon-receptionist bg-success-subtle">
+                                <i class="bi bi-calendar-check text-success"></i>
+                            </div>
+                            <div class="activity-content-receptionist">
+                                <div class="activity-text-receptionist">
+                                    Appointment booked for <strong>John Doe</strong>
+                                </div>
+                                <div class="activity-time-receptionist">5 minutes ago</div>
+                            </div>
+                        </div>
+
+                        <div class="activity-item-receptionist">
+                            <div class="activity-icon-receptionist bg-primary-subtle">
+                                <i class="bi bi-person-plus text-primary"></i>
+                            </div>
+                            <div class="activity-content-receptionist">
+                                <div class="activity-text-receptionist">
+                                    New patient <strong>Mary Johnson</strong> registered
+                                </div>
+                                <div class="activity-time-receptionist">15 minutes ago</div>
+                            </div>
+                        </div>
+
+                        <div class="activity-item-receptionist">
+                            <div class="activity-icon-receptionist bg-warning-subtle">
+                                <i class="bi bi-pencil text-warning"></i>
+                            </div>
+                            <div class="activity-content-receptionist">
+                                <div class="activity-text-receptionist">
+                                    Appointment rescheduled for <strong>Jane Smith</strong>
+                                </div>
+                                <div class="activity-time-receptionist">30 minutes ago</div>
+                            </div>
+                        </div>
+
+                        <div class="activity-item-receptionist">
+                            <div class="activity-icon-receptionist bg-danger-subtle">
+                                <i class="bi bi-x-circle text-danger"></i>
+                            </div>
+                            <div class="activity-content-receptionist">
+                                <div class="activity-text-receptionist">
+                                    Appointment cancelled for <strong>Bob Wilson</strong>
+                                </div>
+                                <div class="activity-time-receptionist">1 hour ago</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

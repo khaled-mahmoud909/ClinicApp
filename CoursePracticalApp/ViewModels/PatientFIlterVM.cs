@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CoursePracticalApp.Models
+namespace CoursePracticalApp.ViewModels
 {
     public class PatientFilterVM
     {
@@ -20,7 +20,7 @@ namespace CoursePracticalApp.Models
 
         public int Page { get; set; } = 1;
 
-        public int PageSize { get; set; } = 4;
+        public int PageSize { get; set; } = 2;
 
         public int TotalCount { get; set; }
 

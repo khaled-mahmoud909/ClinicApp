@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CoursePracticalApp.Models
+namespace CoursePracticalApp.ViewModels
 {
     public class PatientVM
     {
@@ -21,6 +21,26 @@ namespace CoursePracticalApp.Models
         public string PhoneNumber {  get; set; } = string.Empty;
 
         public DateOnly DateOfBirth { get; set; }
+
+        public bool IsActive { get; set; }
+
+        public int TotalAppointments { get; set; }
+
+        public string LastAppintment { get; set; } = null!;
+
+        public int Age 
+        { 
+            get
+            {
+                var today = DateTime.Today;
+                var age = today.Year - DateOfBirth.Year;
+                if (DateOfBirth > new DateOnly(today.Year, today.Month, today.Day))
+                {
+                    age--;
+                }
+                return age;
+            }
+        }
 
     }
 }

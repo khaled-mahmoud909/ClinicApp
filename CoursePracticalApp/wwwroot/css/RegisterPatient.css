@@ -1,0 +1,226 @@
+﻿/* Registration Form Card */
+.registration-form-card {
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+    .registration-form-card .card-header {
+        background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+        border-bottom: 2px solid #e5e7eb;
+        padding: 1.5rem;
+    }
+
+    .registration-form-card .card-body {
+        padding: 2rem;
+    }
+
+/* Input with Icon */
+.input-icon-wrapper {
+    position: relative;
+}
+
+    .input-icon-wrapper .input-icon {
+        position: absolute;
+        left: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #9ca3af;
+        font-size: 1.125rem;
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    .input-icon-wrapper .form-control {
+        padding-left: 3rem;
+    }
+
+/* Consent Box */
+.consent-box {
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    border: 2px solid #f59e0b;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+}
+
+.consent-title {
+    color: #92400e;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.consent-box .form-check {
+    padding-left: 1.75rem;
+}
+
+.consent-box .form-check-label {
+    color: #78350f;
+    font-size: 0.875rem;
+    line-height: 1.5;
+}
+
+.consent-box .form-check-input {
+    border-color: #f59e0b;
+}
+
+    .consent-box .form-check-input:checked {
+        background-color: #f59e0b;
+        border-color: #f59e0b;
+    }
+
+/* Guidelines Card */
+.guidelines-card,
+.documents-card {
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+    .guidelines-card .card-header,
+    .documents-card .card-header {
+        background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+        border-bottom: 2px solid #e5e7eb;
+        padding: 1rem 1.25rem;
+    }
+
+.guideline-item {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+    .guideline-item:last-child {
+        border-bottom: none;
+    }
+
+.guideline-icon {
+    flex-shrink: 0;
+}
+
+    .guideline-icon i {
+        font-size: 1.75rem;
+        color: #6d54d4;
+    }
+
+.guideline-content {
+    flex: 1;
+}
+
+.guideline-title {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 0.25rem;
+}
+
+.guideline-text {
+    font-size: 0.8125rem;
+    color: #6b7280;
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* Documents List */
+.documents-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+    .documents-list li {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.75rem;
+        padding: 0.75rem 0;
+        font-size: 0.875rem;
+        color: #374151;
+        line-height: 1.5;
+    }
+
+        .documents-list li:not(:last-child) {
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .documents-list li i {
+            font-size: 1rem;
+            flex-shrink: 0;
+            margin-top: 0.125rem;
+        }
+
+/* Quick Actions Sidebar */
+.quick-actions-sidebar {
+    background: white;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+    .quick-actions-sidebar h6 {
+        color: #111827;
+    }
+
+.action-link {
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+    padding: 1rem;
+    background: #f9fafb;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    color: #374151;
+    margin-bottom: 0.75rem;
+    transition: all 0.2s ease;
+    border: 1px solid #e5e7eb;
+}
+
+    .action-link:hover {
+        background: #f3f4f6;
+        border-color: #6d54d4;
+        color: #6d54d4;
+        transform: translateX(3px);
+    }
+
+    .action-link i:first-child {
+        font-size: 1.25rem;
+        color: #6d54d4;
+    }
+
+    .action-link span {
+        flex: 1;
+        font-weight: 500;
+        font-size: 0.875rem;
+    }
+
+    .action-link i:last-child {
+        color: #9ca3af;
+    }
+
+    .action-link:hover i:last-child {
+        color: #6d54d4;
+    }
+/* Responsive */
+@media (max-width: 992px) {
+    .registration-form-card .card-body {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .form-actions {
+        flex-direction: column;
+    }
+
+        .form-actions .btn {
+            width: 100%;
+        }
+
+    .guideline-item {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}

@@ -6,11 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CoursePracticalApp.Models
+namespace CoursePracticalApp.ViewModels
 {
     public class PatientFilterListVM
     {
-        public List<PatientVM> patientVMs { get; set; }
+        public List<PatientVM> patientVMs { get; set; } = new List<PatientVM>();
 
         public PatientFilterVM PatientFilterVM { get; set; } = new();
     }

@@ -1,0 +1,144 @@
+﻿<div class="table-responsive">
+    <table class="table table-hover users-table mb-0">
+        <thead>
+            <tr>
+                <th>
+                    <input type="checkbox" class="form-check-input" id="selectAll">
+                </th>
+                <th>User</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Role</th>
+                <th>Specialty</th>
+                <th>Status</th>
+                <th>Joined</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Empty State -->
+            <tr class="empty-state">
+                <td colspan="9" class="text-center py-5">
+                    <div class="empty-icon mb-3">
+                        <i class="bi bi-people"></i>
+                    </div>
+                    <h6 class="text-muted mb-2">No users found</h6>
+                    <p class="text-muted small mb-3">Start by adding your first user to the system</p>
+                    <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addUserModal">
+                        <i class="bi bi-person-plus me-1"></i>
+                        Add First User
+                    </button>
+                </td>
+            </tr>
+
+            <!-- Sample User Rows (Replace with actual data) -->
+            <tr class="user-row d-none">
+                <td>
+                    <input type="checkbox" class="form-check-input user-checkbox">
+                </td>
+                <td>
+                    <div class="user-cell">
+                        <div class="user-avatar-table">
+                            <i class="bi bi-person-fill"></i>
+                        </div>
+                        <div>
+                            <div class="user-name-table">Dr. Sarah Johnson</div>
+                            <div class="user-id-table">#USR001</div>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <span class="text-muted">sarah.johnson@clinic.com</span>
+                </td>
+                <td>
+                    <span class="text-muted">+1 234 567 8900</span>
+                </td>
+                <td>
+                    <span class="role-badge role-doctor">
+                        <i class="bi bi-person-badge me-1"></i>
+                        Doctor
+                    </span>
+                </td>
+                <td>
+                    <span class="specialty-badge">Cardiology</span>
+                </td>
+                <td>
+                    <span class="status-badge status-active">
+                        <i class="bi bi-check-circle-fill me-1"></i>
+                        Active
+                    </span>
+                </td>
+                <td>
+                    <span class="text-muted small">Jan 15, 2024</span>
+                </td>
+                <td>
+                    <div class="action-buttons-table">
+                        <button class="btn btn-sm btn-outline-primary" title="View Details">
+                            <i class="bi bi-eye"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-secondary" title="Edit">
+                            <i class="bi bi-pencil"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-danger" title="Deactivate">
+                            <i class="bi bi-x-circle"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+
+            <tr class="user-row d-none">
+                <td>
+                    <input type="checkbox" class="form-check-input user-checkbox">
+                </td>
+                <td>
+                    <div class="user-cell">
+                        <div class="user-avatar-table">
+                            <i class="bi bi-person-fill"></i>
+                        </div>
+                        <div>
+                            <div class="user-name-table">Emily Brown</div>
+                            <div class="user-id-table">#USR002</div>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <span class="text-muted">emily.brown@clinic.com</span>
+                </td>
+                <td>
+                    <span class="text-muted">+1 234 567 8901</span>
+                </td>
+                <td>
+                    <span class="role-badge role-receptionist">
+                        <i class="bi bi-person-workspace me-1"></i>
+                        Receptionist
+                    </span>
+                </td>
+                <td>
+                    <span class="text-muted">-</span>
+                </td>
+                <td>
+                    <span class="status-badge status-active">
+                        <i class="bi bi-check-circle-fill me-1"></i>
+                        Active
+                    </span>
+                </td>
+                <td>
+                    <span class="text-muted small">Feb 20, 2024</span>
+                </td>
+                <td>
+                    <div class="action-buttons-table">
+                        <button class="btn btn-sm btn-outline-primary" title="View Details">
+                            <i class="bi bi-eye"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-secondary" title="Edit">
+                            <i class="bi bi-pencil"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-danger" title="Deactivate">
+                            <i class="bi bi-x-circle"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

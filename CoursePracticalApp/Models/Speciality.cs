@@ -9,11 +9,10 @@ namespace CoursePracticalApp.Models
 {
     public class Speciality
     {
-        [Key]
-        public int Code {  get; set; }
+        public int Id {  get; set; }
 
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
-        public List<Doctor> Doctors { get; set; }
+        public List<Doctor> Doctors { get; set; } = new List<Doctor>();
     }
 }

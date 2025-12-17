@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,21 +15,15 @@ namespace CoursePracticalApp.Models
 
         public int Id { get; set; }
 
-        [MaxLength(50)]
-        public string FirstName { get; set; }
+        public string AppUserId { get; set; } = null!;
 
-        [MaxLength(50)]
-        public string? LastName { get; set; }
+        public int SpecialityId { get; set; }
 
-        [Column(TypeName = "date")]
-        public DateTime HireDate { get; set; }
+        public AppUser AppUser { get; set; } = null!;
 
-        [ForeignKey("Speciality")]
-        public int SpecialityNum { get; set; }
+        public Speciality Speciality { get; set; } = null!;
 
-        public Speciality Speciality { get; set; }
-
-        public List<Appointment> Appointments { get; set; } = new();
+        public List<Appointment> Appointments { get; set; } = new List<Appointment>();
 
     }
 }

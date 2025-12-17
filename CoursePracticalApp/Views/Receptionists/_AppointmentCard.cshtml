@@ -1,0 +1,87 @@
+﻿@model List<AppointmentVM>
+
+<div class="modern-results-list" id="appointmentResults">
+    @foreach (var appointment in Model)
+    {
+        <!-- Appointment Card 1 -->
+        <div class="result-card appointment-card">
+            <div class="card-indicator status-@appointment.Status"></div>
+            <div class="result-card-body">
+                <div class="result-main-section">
+                    <div class="result-icon-wrapper">
+                        <div class="result-icon appointment-icon">
+                            <i class="bi bi-calendar-check"></i>
+                        </div>
+                        <span class="result-type-badge">Appointment</span>
+                    </div>
+
+                    <div class="result-content-section">
+                        <div class="result-header-row">
+                            <h6 class="result-main-title">@appointment.Type - @appointment.DoctorName</h6>
+                            <div class="status-badge-modern @appointment.Status">
+                                <i class="bi bi-check-circle-fill"></i>
+                                <span>@appointment.Status</span>
+                            </div>
+                        </div>
+
+                        <div class="result-details-grid">
+                            <div class="detail-item">
+                                <i class="bi bi-person-circle"></i>
+                                <div class="detail-content">
+                                    <span class="detail-label">Patient</span>
+                                    <span class="detail-value">@appointment.PatientName @("#P" + appointment.PatientId.ToString("000000"))</span>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <i class="bi bi-calendar3"></i>
+                                <div class="detail-content">
+                                    <span class="detail-label">Date & Time</span>
+                                    <span class="detail-value">@appointment.DateTime</span>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <i class="bi bi-hospital"></i>
+                                <div class="detail-content">
+                                    <span class="detail-label">Location</span>
+                                    <span class="detail-value">Room 201, Main Building</span>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <i class="bi bi-clock"></i>
+                                <div class="detail-content">
+                                    <span class="detail-label">Duration</span>
+                                    <span class="detail-value">@appointment.Duration</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="result-footer-info">
+                            <span class="info-chip">
+                                <i class="bi bi-file-medical"></i>
+                                @appointment.Type
+                            </span>
+                            <span class="info-chip">
+                                <i class="bi bi-telephone"></i>
+                                @appointment.PatientPhone
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="result-actions-section">
+                    <button class="action-btn action-btn-primary">
+                        <i class="bi bi-eye"></i>
+                        <span>View Details</span>
+                    </button>
+                    <button class="action-btn action-btn-secondary">
+                        <i class="bi bi-pencil"></i>
+                        <span>Edit</span>
+                    </button>
+                    <button class="action-btn action-btn-icon">
+                        <i class="bi bi-three-dots-vertical"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    }
+</div>

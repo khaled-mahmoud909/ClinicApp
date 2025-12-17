@@ -1,0 +1,614 @@
+﻿@model AppointmentCreateVM
+
+<div class="container-fluid">
+    <!-- Header -->
+    <div class="page-header mb-4">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <h4 class="mb-2 fw-bold">Book Appointment</h4>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Book Appointment</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <!-- Booking Form -->
+        <div class="col-12 col-lg-8">
+            <div class="booking-form-card">
+                <div class="card-header">
+                    <h5 class="mb-0 fw-bold">
+                        <i class="bi bi-calendar-plus me-2"></i>
+                        Appointment Details
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <form id="bookingForm" method="post">
+                        <!-- Step 1: Patient Selection -->
+                        <div class="form-section">
+                            <div class="section-header">
+                                <span class="section-number">1</span>
+                                <h6 class="section-title">Patient Information</h6>
+                            </div>
+
+                            <div class="row g-3">
+                                <div class="col-12">
+                                    <label class="form-label fw-semibold">
+                                        Search Patient <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="search-patient-wrapper">
+                                        <i class="bi bi-search search-icon"></i>
+                                        <input type="text"
+                                               class="form-control form-control-lg"
+                                               id="patientSearch"
+                                               placeholder="Search by name or phone..."
+                                               autocomplete="off"/>
+@*                                         <button type="button" class="btn btn-outline-primary btn-sm search-btn">
+                                            Search
+                                        </button> *@
+
+                                        <div class="patient-search-dropdown" id="patientSearchDropdown">
+                                            <div class="dropdown-header">
+                                                <span class="text-muted small">Search Results</span>
+                                            </div>
+                                            <div class="dropdown-body">
+                                                <!-- Loading State -->
+                                                <div class="dropdown-loading d-none" id="searchLoading">
+                                                    <div class="spinner-border spinner-border-sm text-primary" role="status">
+                                                        <span class="visually-hidden">Loading...</span>
+                                                    </div>
+                                                    <span class="ms-2 text-muted">Searching...</span>
+                                                </div>
+
+                                                <!-- No Results -->
+                                                <div class="dropdown-empty d-none" id="noResults">
+                                                    <i class="bi bi-search text-muted"></i>
+                                                    <p class="mb-0 text-muted">No patients found</p>
+                                                </div>
+
+                                                <!-- Patient Results List -->
+                                                <div class="patient-results-list" id="patientResultsList"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-text">
+                                        <i class="bi bi-info-circle me-1"></i>
+                                        Can't find the patient?
+                                        <a asp-action="RegisterPatient" class="text-primary">Register new patient</a>
+                                    </div>
+                                </div>
+
+                                <!-- Patient Details (Hidden until selected) -->
+                                <div class="col-12 d-none" id="selectedPatientCard">
+                                    <input type="hidden" asp-for="PatientId" id="selectedPatientId" />
+                                    <div class="selected-patient-card">
+                                        <div class="patient-header">
+                                            <div class="patient-avatar-large">
+                                                <i class="bi bi-person-circle"></i>
+                                            </div>
+                                            <div class="patient-details">
+                                                <h6 class="patient-name-large" id="selectedPatientName"></h6>
+                                                <div class="patient-meta">
+                                                    <span class="meta-badge">
+                                                        <i class="bi bi-person-vcard"></i>
+                                                        <span id="selectedPatientIdDisplay"></span>
+                                                    </span>
+                                                    <span class="meta-badge">
+                                                        <i class="bi bi-telephone"></i>
+                                                        <span id="selectedPatientPhone"></span>
+                                                    </span>
+@*                                                     <span class="meta-badge">
+                                                        <i class="bi bi-calendar3"></i>
+                                                        Age: 35
+                                                    </span> *@
+                                                </div>
+                                            </div>
+                                            <button type="button" class="btn btn-sm btn-outline-secondary" id="removePatientBtn">
+                                                <i class="bi bi-x-lg"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr class="my-4">
+
+                        <!-- Step 2: Doctor & Specialty Selection -->
+                        <div class="form-section">
+                            <div class="section-header">
+                                <span class="section-number">2</span>
+                                <h6 class="section-title">Select Doctor & Specialty</h6>
+                            </div>
+
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label asp-for="Specialty" class="form-label fw-semibold">
+                                        Specialty <span class="text-danger">*</span>
+                                    </label>
+                                    <select asp-for="Specialty" asp-items="@ViewBag.Specialties" class="form-select form-select-lg">
+                                        <option value="">Choose specialty...</option>
+                                    </select>
+                                    <span asp-validation-for="Specialty" class="text-danger"></span>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label asp-for="DoctorId" class="form-label fw-semibold">
+                                        Doctor <span class="text-danger">*</span>
+                                    </label>
+                                    <select asp-for="DoctorId" class="form-select form-select-lg" disabled="true">
+                                        <option value="">Choose doctor...</option>
+                                    </select>
+                                    <span asp-validation-for="DoctorId" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr class="my-4">
+
+                        <!-- Step 3: Date & Time Selection -->
+                        <div class="form-section">
+                            <div class="section-header">
+                                <span class="section-number">3</span>
+                                <h6 class="section-title">Date & Time</h6>
+                            </div>
+
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label asp-for="AppointmentDate" class="form-label fw-semibold">
+                                        Appointment Date <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="date"
+                                           class="form-control form-control-lg"
+                                           asp-for="AppointmentDate" />
+                                    <div class="form-text">
+                                        <i class="bi bi-calendar-check me-1"></i>
+                                        Select a date within the next 30 days
+                                    </div>
+                                    <span asp-validation-for="AppointmentDate" class="text-danger"></span>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label asp-for="AppointmentTime" class="form-label fw-semibold">
+                                        Appointment Time <span class="text-danger">*</span>
+                                    </label>
+                                    <select class="form-select form-select-lg" asp-for="AppointmentTime" disabled="true">
+                                        <option value="">Choose time...</option>
+                                    </select>
+                                    <span asp-validation-for="AppointmentTime" class="text-danger"></span>
+                                </div>
+
+                                <div class="col-12">
+                                    <label asp-for="Duration" class="form-label fw-semibold">
+                                        Duration <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="duration-options">
+                                        <input type="radio" class="btn-check" value="30" checked asp-for="Duration">
+                                        <label class="btn btn-outline-primary" for="duration30">
+                                            <i class="bi bi-clock"></i>
+                                            30 min
+                                        </label>
+
+                                        <input type="radio" class="btn-check" value="45" asp-for="Duration">
+                                        <label class="btn btn-outline-primary" for="duration45">
+                                            <i class="bi bi-clock"></i>
+                                            45 min
+                                        </label>
+
+                                        <input type="radio" class="btn-check" value="60" asp-for="Duration">
+                                        <label class="btn btn-outline-primary" for="duration60">
+                                            <i class="bi bi-clock"></i>
+                                            60 min
+                                        </label>
+                                    </div>
+                                    <span asp-validation-for="Duration" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr class="my-4">
+
+                        <!-- Step 4: Appointment Type & Notes -->
+                        <div class="form-section">
+                            <div class="section-header">
+                                <span class="section-number">4</span>
+                                <h6 class="section-title">Additional Information</h6>
+                            </div>
+
+                            <div class="row g-3">
+                                <div class="col-12">
+                                    <label asp-for="AppointmentType" class="form-label fw-semibold">
+                                        Appointment Type <span class="text-danger">*</span>
+                                    </label>
+                                    <select class="form-select form-select-lg" asp-for="AppointmentType">
+                                        <option value="">Choose type...</option>
+                                        <option value="Consultation">Initial Consultation</option>
+                                        <option value="Followup">Follow-up Visit</option>
+                                        <option value="Checkup">Regular Check-up</option>
+                                        <option value="Emergency">Emergency</option>
+                                    </select>
+                                    <span asp-validation-for="AppointmentType" class="text-danger"></span>
+                                </div>
+
+                                <div class="col-12">
+                                    <label asp-for="AppointmentDescription" class="form-label fw-semibold">
+                                        Notes <span class="text-muted">(Optional)</span>
+                                    </label>
+                                    <textarea class="form-control"
+                                              rows="4"
+                                              placeholder="Enter any special requirements or notes for this appointment..."
+                                              asp-for="AppointmentDescription">
+                                    </textarea>
+                                    <span asp-validation-for="AppointmentDescription" class="text-danger"></span>
+                                    <div class="form-text">
+                                        Maximum 300 characters
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="sendReminder" checked>
+                                        <label class="form-check-label" for="sendReminder">
+                                            <i class="bi bi-bell me-1"></i>
+                                            Send appointment reminder to patient via SMS/Email
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Form Actions -->
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-outline-secondary btn-lg">
+                                <i class="bi bi-x-circle me-2"></i>
+                                Cancel
+                            </button>
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="bi bi-check-circle me-2"></i>
+                                Book Appointment
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar: Calendar & Available Slots -->
+        <div class="col-12 col-lg-4">
+            <!-- Mini Calendar -->
+            
+            <partial name="_Calendar" />
+
+            <!-- Available Time Slots -->
+            <div class="time-slots-card">
+                <div class="card-header">
+                    <h6 class="mb-0 fw-bold">
+                        <i class="bi bi-clock me-2"></i>
+                        Available Time Slots
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="slots-info">
+                        <i class="bi bi-info-circle me-2"></i>
+                        <span>Select a doctor and date to view available slots</span>
+                    </div>
+
+                    <!-- Time Slots Grid (Shows when doctor/date selected) -->
+                    <div class="time-slots-grid d-none">
+                    </div>
+
+                    <div class="slots-legend mt-3 d-none">
+                        <div class="legend-item">
+                            <span class="legend-dot available"></span>
+                            Available
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-dot booked"></span>
+                            Booked
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Tips -->
+            <div class="tips-card mt-4">
+                <div class="card-header">
+                    <h6 class="mb-0 fw-bold">
+                        <i class="bi bi-lightbulb me-2"></i>
+                        Quick Tips
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <ul class="tips-list">
+                        <li>
+                            <i class="bi bi-check-circle text-success"></i>
+                            Book appointments at least 24 hours in advance
+                        </li>
+                        <li>
+                            <i class="bi bi-check-circle text-success"></i>
+                            Confirm patient contact details before booking
+                        </li>
+                        <li>
+                            <i class="bi bi-check-circle text-success"></i>
+                            Check doctor availability for the selected date
+                        </li>
+                        <li>
+                            <i class="bi bi-check-circle text-success"></i>
+                            Add notes for special requirements
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        let selectedPatientId = null;
+        // Show selected patient card when patient is searched
+        document.getElementById('patientSearch').addEventListener('input', function() {
+            let timeOut;
+            clearTimeout(timeOut);
+
+            timeOut = setTimeout(() => {
+                const query = this.value.trim();
+                console.log('Searching for patients with query:', query);
+                const dropdown = document.getElementById('patientSearchDropdown');
+                console.log('Dropdown element:', dropdown);
+                const resultsList = document.getElementById('patientResultsList');
+                const noResults = document.getElementById('noResults');
+                const loading = document.getElementById('searchLoading');
+                if(query.length >= 3) {
+                    dropdown.classList.add('show');
+                    console.log('Dropdown shown');
+                    // Show loading
+                    loading.classList.remove('d-none');
+                    noResults.classList.add('d-none');
+                    resultsList.innerHTML = '';
+                    // Simulate search delay
+                    $.ajax({
+                        url: '/Receptionists/SearchPatients',
+                        type: 'GET',
+                        data: { searchTerm: query },
+                        success: function(data) {
+                            console.log('Search results:', data);
+                            loading.classList.add('d-none');
+                            if(data.length > 0) {
+                                resultsList.innerHTML = '';
+                                data.forEach(patient => {
+                                    const patientItem = document.createElement('div');
+                                    patientItem.classList.add('patient-result-item');
+                                    patientItem.dataset.patientId = patient.id;
+                                    patientItem.dataset.patientName = patient.fullName;
+                                    patientItem.dataset.patientPhone = patient.phoneNumber;
+                                    patientItem.innerHTML = `
+                                        <div class="patient-result-avatar">
+                                            <i class="bi bi-person-circle"></i>
+                                        </div>
+                                        <div class="patient-result-info">
+                                            <div class="patient-result-name">${patient.fullName}</div>
+                                            <div class="patient-result-meta">
+                                                <span><i class="bi bi-person-vcard me-1"></i>ID: ${patient.patientId}</span>
+                                                <span><i class="bi bi-telephone me-1"></i>${patient.phoneNumber}</span>
+                                            </div>
+                                        </div>
+                                        <i class="bi bi-check-circle patient-result-check"></i>
+                                    `;
+
+                                    patientItem.addEventListener('click', function(){
+                                        selectPatient(this);
+                                    });
+
+                                    resultsList.appendChild(patientItem);
+                                    });
+                                    resultsList.classList.remove('d-none');
+                            } else {
+                                console.log('No patients found');
+                                noResults.classList.remove('d-none');
+                                resultsList.innerHTML = '';
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                             console.error('AJAX error:', status, error);
+                            loading.classList.add('d-none');
+                            alert('Error searching for patients.' + error);
+                        }
+                    });
+                } else {
+                    console.log('Query too short, hiding dropdown');
+                    dropdown.classList.remove('show');
+                    resultsList.innerHTML = '';
+                    noResults.classList.add('d-none');
+                    loading.classList.add('d-none');
+                }
+            }, 500);
+        });
+
+        function selectPatient(patientItem) {
+            const patientId = patientItem.dataset.patientId;
+            const patientName = patientItem.dataset.patientName;
+            const patientPhone = patientItem.dataset.patientPhone;
+            const patientIdDisplay = "ID: #P" + patientId;
+
+            document.getElementById('selectedPatientId').value = patientId;
+
+            document.getElementById('selectedPatientName').textContent = patientName;
+            document.getElementById('selectedPatientIdDisplay').textContent = patientIdDisplay;
+            document.getElementById('selectedPatientPhone').textContent = patientPhone;
+
+            document.getElementById('selectedPatientCard').classList.remove('d-none');
+
+            document.getElementById('patientSearchDropdown').classList.remove('show');
+
+            document.getElementById('patientSearch').value = patientName;
+        }
+
+        // Remove selected patient
+        document.getElementById('removePatientBtn').addEventListener('click', function() {
+            document.getElementById('selectedPatientId').value = '';
+            document.getElementById('selectedPatientCard').classList.add('d-none');
+            document.getElementById('patientSearch').value = '';
+        });
+
+        document.addEventListener('click', function(event) {
+            const dropdown = document.getElementById('patientSearchDropdown');
+            const searchInput = document.getElementById('patientSearch');
+            if (!dropdown.contains(event.target) && event.target !== searchInput) {
+                dropdown.classList.remove('show');
+            }
+        });
+
+        $('#Specialty').on('change', function() {
+            const specialty = $(this).val();
+            const doctorDropDown = $('#DoctorId');
+
+            doctorDropDown.empty().append('<option value="">Loading doctors...</option>');
+            
+            if (specialty) {
+                $.ajax({
+                    url: '/Receptionists/GetDoctorsBySpecialty',
+                    type: 'GET',
+                    data: { specialty: specialty },
+                    success: function(data) {
+                        doctorDropDown.empty().append('<option value="">Choose doctor...</option>');
+                        $.each(data, function(index, doctor) {
+                            const newOption = document.createElement('option');
+                            newOption.value = doctor.id;
+                            newOption.text = doctor.fullName;
+                            doctorDropDown.append(newOption);
+                        });
+                        doctorDropDown.prop('disabled', false);
+                    },
+                    error: function() {
+                        alert('Error fetching doctors for the selected specialty.');
+                        doctorDropDown.empty().append('<option value="">Error loading doctors</option>');
+                    }
+                });
+            } else {
+                $('#DoctorId').empty().append('<option value="">Choose doctor...</option>').prop('disabled', true);
+            }
+        });
+ 
+
+
+        // Show time slots when doctor and date are selected
+        document.getElementById('DoctorId').addEventListener('change', checkAvailability);
+        document.getElementById('AppointmentDate').addEventListener('change', checkAvailability);
+        document.getElementById('AppointmentTime').addEventListener('change', setTimeSlot);
+
+        function checkAvailability() {
+            const doctorId = document.getElementById('DoctorId').value;
+            const date = document.getElementById('AppointmentDate').value;
+
+            const timeSlotsGrid = document.querySelector('.time-slots-grid');
+            const slotsInfo = document.querySelector('.slots-info');
+            const slotsLegend = document.querySelector('.slots-legend');
+            const timeSelect = document.getElementById('AppointmentTime');
+
+            if(doctorId && date) {
+                timeSlotsGrid.classList.remove('d-none');
+                console.log(date)
+                timeSelect.innerHTML = '<option value="">Loading available times...</option>';
+                timeSelect.disabled = false;
+                timeSlotsGrid.innerHTML = '<div class="text-center w-100"><div class="spinner-border spinner-border-sm text-primary"></div> Checking...</div>';
+                slotsInfo.classList.add('d-none');
+
+                $.ajax({
+                    url: '/Receptionists/GetAvailableSlots',
+                    type: 'GET',
+                    data: { doctorId: doctorId, appointmentDate: date },
+                    success: function(data) {
+                        timeSlotsGrid.innerHTML = '';
+                        slotsLegend.classList.remove('d-none');
+                        timeSelect.innerHTML = '<option value="">Choose time...</option>';
+                        if(data.length > 0) {
+                            data.forEach(slot => {
+                                const slotBadge = document.createElement('div');
+                                slotBadge.classList.add('time-slot-badge');
+                                slotBadge.textContent = slot.time;
+                                if(slot.isBooked) {
+                                    slotBadge.classList.add('booked');
+                                } else {
+                                    slotBadge.classList.add('available');
+                                    const newOption = document.createElement('option');
+                                    newOption.value = slot.rawTime;
+                                    newOption.text = slot.time;
+                                    slotBadge.addEventListener('click', function() {
+                                        document.querySelectorAll('.time-slot-badge').forEach(s => s.classList.remove('selected'));
+                                        this.classList.add('selected');
+                                        // Update time select
+                                        const time = slot.rawTime
+                                        timeSelect.value = time;
+                                    });
+                                    timeSelect.appendChild(newOption);
+                                }
+                                timeSlotsGrid.appendChild(slotBadge);
+                            });
+                        } else {
+                            timeSlotsGrid.innerHTML = '<p class="text-muted">No available slots for the selected date.</p>';
+                            timeSelect.innerHTML = '<option value="">No available times</option>';
+                        }
+                    },
+                    error: function() {
+                        alert('Error fetching available time slots.');
+                        timeSlotsGrid.innerHTML = '<p class="text-danger">Error loading slots.</p>';
+                    }
+                });
+            } else {
+                timeSlotsGrid.classList.add('d-none');
+                slotsInfo.classList.remove('d-none');
+                slotsLegend.classList.add('d-none');
+                timeSelect.innerHTML = '<option value="">Choose time...</option>';
+                timeSelect.disabled = true;
+            }
+
+        }
+
+        function setTimeSlot()
+        {
+            const timeSelect = document.getElementById('AppointmentTime');
+            document.querySelectorAll('.time-slot-badge').forEach(slot => {
+                const slotTime = slot.textContent.trim();
+                const selectedTime = timeSelect.options[timeSelect.selectedIndex].text;
+                console.log(slotTime);
+                console.log(selectedTime);
+                if(slotTime === selectedTime || slotTime === selectedTime) {
+                    slot.classList.add('selected');
+                    console.log('Selected slot:', slotTime);
+                }
+                else {
+                    slot.classList.remove('selected');
+                    console.log('Deselected slot:', slotTime);
+                }
+            });
+        }
+
+        // // Form submission
+        // document.getElementById('bookingForm').addEventListener('submit', function(e) {
+        //     e.preventDefault();
+
+        //     // Validate form
+        //     if (this.checkValidity()) {
+        //         alert('Appointment booked successfully!');
+        //         // Here you would send the data to your backend
+        //     } else {
+        //         alert('Please fill in all required fields');
+        //     }
+        // });
+
+        // // Calendar day click
+        // document.querySelectorAll('.calendar-day:not(.disabled)').forEach(day => {
+        //     day.addEventListener('click', function() {
+        //         document.querySelectorAll('.calendar-day').forEach(d => d.classList.remove('selected'));
+        //         this.classList.add('selected');
+        //     });
+        // });
+    </script>
+}

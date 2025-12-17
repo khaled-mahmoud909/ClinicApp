@@ -45,6 +45,13 @@
                 });
             }
         })
+
+        $(".js-page-link").on("click", function() {
+            var pageNumber = $(this).data('page');
+            ("#form-filter-patient #Page").val(pageNumber);
+            $("#form-filter-patient").submit();
+        });
+
     </script>
 }
 

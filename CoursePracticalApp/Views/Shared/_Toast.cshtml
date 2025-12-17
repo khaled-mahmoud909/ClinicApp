@@ -1,0 +1,59 @@
+﻿!-- Success Toast -->
+<div class="position-fixed top-0 end-0 p-3" style="z-index: 11000">
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div id="successToast" class="toast align-items-center border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-body">
+                <div class="d-flex align-items-center">
+                    <div class="toast-icon-success">
+                        <i class="bi bi-check-circle-fill"></i>
+                    </div>
+                    <div class="toast-content">
+                        <div class="toast-title">Success!</div>
+                        <div class="toast-message">@TempData["SuccessMessage"]</div>
+                    </div>
+                    <button type="button" class="btn-close ms-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
+    }
+
+    <!-- Error Toast -->
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div id="errorToast" class="toast align-items-center border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-body">
+                <div class="d-flex align-items-center">
+                    <div class="toast-icon-error">
+                        <i class="bi bi-x-circle-fill"></i>
+                    </div>
+                    <div class="toast-content">
+                        <div class="toast-title">Error!</div>
+                        <div class="toast-message">@TempData["ErrorMessage"]</div>
+                    </div>
+                    <button type="button" class="btn-close ms-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
+    }
+
+    <!-- Info Toast -->
+    @if (TempData["InfoMessage"] != null)
+    {
+        <div id="infoToast" class="toast align-items-center border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-body">
+                <div class="d-flex align-items-center">
+                    <div class="toast-icon-info">
+                        <i class="bi bi-info-circle-fill"></i>
+                    </div>
+                    <div class="toast-content">
+                        <div class="toast-title">Information</div>
+                        <div class="toast-message">@TempData["InfoMessage"]</div>
+                    </div>
+                    <button type="button" class="btn-close ms-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
+    }
+</div>

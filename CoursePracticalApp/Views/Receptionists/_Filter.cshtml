@@ -1,0 +1,63 @@
+﻿@model SearchFilterVM
+
+<!-- Enhanced Search Section -->
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="search-hero-card">
+            <div class="search-hero-content">
+                <div class="search-hero-text">
+                    <h2 class="search-hero-title">What are you looking for?</h2>
+                    <p class="search-hero-subtitle">Search for patients or appointments</p>
+                </div>
+                <div class="search-hero-illustration">
+                    <i class="bi bi-search"></i>
+                </div>
+            </div>
+
+            <div class="enhanced-search-wrapper">
+                <div class="search-input-group">
+                    <i class="bi bi-search search-input-icon"></i>
+                    <input type="text"
+                           class="form-control search-input-enhanced"
+                           id="globalSearch"
+                           placeholder="Search by name, ID, phone number, or date..."
+                           autocomplete="off" />
+                    <button type="button" class="btn btn-primary search-btn-enhanced">
+                        <i class="bi bi-search me-2"></i>
+                        Search
+                    </button>
+                </div>
+
+                <!-- Quick Filters -->
+                <div class="quick-filters-row">
+                    <div class="filter-label">
+                        <i class="bi bi-funnel me-2"></i>
+                        Quick Filters:
+                    </div>
+                    <div class="filter-chips-group">
+                        <button type="button" class="filter-chip-modern active" data-filter="all">
+                            <i class="bi bi-grid-3x3-gap"></i>
+                            <span>All Results</span>
+                        </button>
+                        <button type="button" class="filter-chip-modern" data-filter="today">
+                            <i class="bi bi-calendar-day"></i>
+                            <span>Today</span>
+                        </button>
+                        <button type="button" class="filter-chip-modern" data-filter="week">
+                            <i class="bi bi-calendar-week"></i>
+                            <span>This Week</span>
+                        </button>
+                        <button type="button" class="filter-chip-modern" data-filter="urgent">
+                            <i class="bi bi-exclamation-circle"></i>
+                            <span>Urgent</span>
+                        </button>
+                        <button type="button" class="filter-chip-modern" data-filter="recent">
+                            <i class="bi bi-clock-history"></i>
+                            <span>Recent</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

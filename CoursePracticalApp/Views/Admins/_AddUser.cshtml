@@ -1,0 +1,112 @@
+﻿@model AddUserVM
+
+<div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addUserModalLabel">
+                    <i class="bi bi-person-plus me-2"></i>
+                    Add New User
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="create-user-form" method="post">
+                <div class="modal-body">
+                    <!-- Role Selection -->
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold" asp-for="UserRole">Select Role <span class="text-danger">*</span></label>
+                        <div class="role-selection-grid">
+                            <input type="radio" class="btn-check" asp-for="UserRole" id="roleDoctor" value="DOCTOR" checked>
+                            <label class="btn btn-outline-primary role-selection-card" for="roleDoctor">
+                                <i class="bi bi-person-badge"></i>
+                                <span>Doctor</span>
+                            </label>
+
+                            <input type="radio" class="btn-check" asp-for="UserRole" id="roleReceptionist" value="RECEPTIONEST">
+                            <label class="btn btn-outline-primary role-selection-card" for="roleReceptionist">
+                                <i class="bi bi-person-workspace"></i>
+                                <span>Receptionist</span>
+                            </label>
+                        </div>
+                        <span asp-validation-for="UserRole" class="text-danger"></span>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <!-- Personal Information -->
+                    <h6 class="mb-3 fw-semibold">Personal Information</h6>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label asp-for="FirstName" class="form-label"></label>
+                            <span class="text-danger">*</span>
+                            <input class="form-control" asp-for="FirstName">
+                            <span class="text-danger" asp-validation-for="FirstName"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="LastName" class="form-label"></label>
+                            <span class="text-danger">*</span>
+                            <input class="form-control" asp-for="LastName">
+                            <span class="text-danger" asp-validation-for="LastName"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="Email" class="form-label"></label>
+                            <span class="text-danger">*</span>
+                            <input class="form-control" asp-for="Email">
+                            <span class="text-danger" asp-validation-for="Email"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="PhoneNumber" class="form-label"></label>
+                            <span class="text-danger">*</span>
+                            <input class="form-control" asp-for="PhoneNumber">
+                            <span class="text-danger" asp-validation-for="PhoneNumber"></span>
+                        </div>
+                    </div>
+
+                    <!-- Doctor-Specific Fields -->
+                    <div id="doctorFields" class="mt-4">
+                        <h6 class="mb-3 fw-semibold">Doctor Information</h6>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label asp-for="Speciality" class="form-label"></label>
+                                <span class="text-danger">*</span>
+                                <select class="form-select" asp-for="Speciality" asp-items="@ViewBag.Specialities">
+                                    <option value="">Select Specialty</option>
+                                </select>
+                                <span class="text-danger" asp-validation-for="Speciality"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <!-- Account Settings -->
+                    <h6 class="mb-3 fw-semibold">Account Settings</h6>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label asp-for="Password" class="form-label"></label>
+                            <span class="text-danger">*</span>
+                            <input class="form-control" asp-for="Password">
+                            <span class="text-danger" asp-validation-for="Password"></span>
+                            <div class="form-text">Minimum 8 characters with uppercase, lowercase, and number</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="ConfirmPassword" class="form-label"></label>
+                            <span class="text-danger">*</span>
+                            <input class="form-control" asp-for="ConfirmPassword">
+                            <span class="text-danger" asp-validation-for="ConfirmPassword"></span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button class="btn btn-primary js-btn-createUser">
+                        <i class="bi bi-check-circle me-1"></i>
+                        Create User
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <partial name="_Toast" />
+</div>

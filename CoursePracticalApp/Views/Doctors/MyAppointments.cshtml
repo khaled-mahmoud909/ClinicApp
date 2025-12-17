@@ -1,0 +1,180 @@
+﻿@model List<AppointmentVM>
+
+<div class="container-fluid">
+    <!-- Header -->
+    <div class="page-header mb-4">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <h4 class="mb-2 fw-bold">My Appointments</h4>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a asp-action="Dashboard">Dashboard</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">My Appointments</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search and Filter -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="appointments-toolbar">
+                <div class="search-box">
+                    <i class="bi bi-search"></i>
+                    <input type="text"
+                           class="form-control"
+                           id="searchAppointments"
+                           placeholder="Search by patient name, ID, or phone..." />
+                </div>
+                <div class="filter-group">
+                    <label for="statusFilter" class="filter-label">Status:</label>
+                    <select class="form-select" id="statusFilter">
+                        <option value="all">All Status</option>
+                        <option value="Scheduled">Scheduled</option>
+                        <option value="Confirmed">Confirmed</option>
+                        <option value="Completed">Completed</option>
+                        <option value="Canceled">Canceled</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Appointments List -->
+    <div class="row">
+        <div class="col-12">
+            <div class="appointments-card">
+                @if(!Model.Any())
+                {
+                    <div class="empty-state-simple">
+                        <i class="bi bi-calendar-x"></i>
+                        <h5>No Appointments Found</h5>
+                        <p>Try adjusting your search or filter criteria</p>
+                    </div>
+                }
+                else
+                {
+                    <div class="appointments-list-simple">
+
+                    @foreach (var appointment in Model)
+                    {
+                        <div class="appointment-row" data-status=@appointment.Status>
+                            <div class="appointment-time">
+                                <span class="time-text">@appointment.Time</span>
+                                <span class="date-text">@appointment.Date</span>
+                            </div>
+
+                            <div class="appointment-patient">
+                                <div class="patient-icon">
+                                    <i class="bi bi-person-circle"></i>
+                                </div>
+                                <div class="patient-info">
+                                    <h6 class="patient-name">@appointment.PatientName</h6>
+                                    <p class="patient-details">
+                                        <span>@("#P" + appointment.PatientId.ToString("000000"))</span>
+                                        <span>•</span>
+                                        <span>@appointment.PatientPhone</span>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="appointment-type-doc">
+                                <i class="bi bi-file-medical"></i>
+                                <span>@appointment.Type</span>
+                            </div>
+
+                            <div class="appointment-status">
+                                <span class="badge-status confirmed">@appointment.Status</span>
+                            </div>
+
+                            @if (appointment.Status == "Completed")
+                            {
+                                <div class="appointment-actions-simple">
+                                    <button class="btn-simple btn-view" title="View Details">
+                                        <i class="bi bi-eye"></i>
+                                    </button>
+                                    <button class="btn-simple btn-secondary" title="View Notes">
+                                        <i class="bi bi-file-earmark-text"></i>
+                                    </button>
+                                </div>
+                            }
+                            else if (appointment.Status == "Canceled")
+                            {
+                                <div class="appointment-actions-simple">
+                                    <button class="btn-simple btn-view" title="View Details">
+                                        <i class="bi bi-eye"></i>
+                                    </button>
+                                    <button class="btn-simple btn-secondary" title="View Cancellation Reason">
+                                        <i class="bi bi-x-circle"></i>
+                                    </button>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="appointment-actions-simple">
+                                    <button class="btn-simple btn-view" title="View Details">
+                                        <i class="bi bi-eye"></i>
+                                    </button>
+                                    <button class="btn-simple btn-start" title="Start Appointment">
+                                        <i class="bi bi-play-circle"></i>
+                                    </button>
+                                </div>
+                            }
+                        </div>
+                    }
+                </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Search functionality
+        document.getElementById('searchAppointments').addEventListener('input', function() {
+
+        });
+
+        // Status filter
+        document.getElementById('statusFilter').addEventListener('change', function() {
+            filterAppointments();
+        });
+
+        function filterAppointments() {
+            const searchTerm = document.getElementById('searchAppointments').value.toLowerCase();
+            const statusFilter = document.getElementById('statusFilter').value;
+            const appointments = document.querySelectorAll('.appointment-row');
+            let visibleCount = 0;
+
+            appointments.forEach(appointment => {
+                const patientName = appointment.querySelector('.patient-name').textContent.toLowerCase();
+                const patientDetails = appointment.querySelector('.patient-details').textContent.toLowerCase();
+                const status = appointment.dataset.status;
+
+                const matchesSearch = patientName.includes(searchTerm) || patientDetails.includes(searchTerm);
+                const matchesStatus = statusFilter === 'all' || status === statusFilter;
+
+                if (matchesSearch && matchesStatus) {
+                    appointment.style.display = 'flex';
+                    visibleCount++;
+                } else {
+                    appointment.style.display = 'none';
+                }
+            });
+
+            // Show/hide empty state
+            const emptyState = document.querySelector('.empty-state-simple');
+            const appointmentsList = document.querySelector('.appointments-list-simple');
+
+            if (visibleCount === 0) {
+                appointmentsList.style.display = 'none';
+                emptyState.style.display = 'flex';
+            } else {
+                appointmentsList.style.display = 'block';
+                emptyState.style.display = 'none';
+            }
+        }
+    </script>
+}

@@ -1,0 +1,33 @@
+﻿<div class="card-header">
+    <div class="row g-3">
+        <div class="col-12 col-md-4">
+            <div class="search-box">
+                <i class="bi bi-search search-icon"></i>
+                <input type="text" class="form-control" placeholder="Search by name, email or phone..." id="searchInput">
+            </div>
+        </div>
+
+        <div class="col-6 col-md-3">
+            <select class="form-select" id="roleFilter">
+                <option value="All">All Roles</option>
+                <option value="Doctor">Doctors</option>
+                <option value="Receptionist">Receptionists</option>
+            </select>
+        </div>
+
+        <div class="col-6 col-md-3">
+            <select class="form-select" id="statusFilter">
+                <option value="All">All Status</option>
+                <option value="Active">Active</option>
+                <option value="Inactive">Inactive</option>
+            </select>
+        </div>
+
+        <div class="col-12 col-md-2">
+            <button class="btn btn-outline-secondary w-100" id="clearFilters">
+                <i class="bi bi-x-circle me-1"></i>
+                Clear
+            </button>
+        </div>
+    </div>
+</div>

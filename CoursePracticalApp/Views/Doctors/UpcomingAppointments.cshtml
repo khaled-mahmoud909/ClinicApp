@@ -1,0 +1,253 @@
+﻿<!-- Upcoming Appointments Card -->
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="upcoming-card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <div>
+                    <h5 class="mb-1 fw-bold">
+                        <i class="bi bi-calendar2-week text-warning me-2"></i>
+                        Upcoming Appointments
+                    </h5>
+                    <p class="text-muted small mb-0">Next 7 days</p>
+                </div>
+                <button class="btn btn-outline-warning btn-sm">
+                    <i class="bi bi-calendar-plus me-1"></i>
+                    View All
+                </button>
+            </div>
+            <div class="card-body">
+                <!-- Empty State -->
+                <div class="empty-upcoming text-center py-5">
+                    <div class="empty-icon mb-3">
+                        <i class="bi bi-calendar2-check"></i>
+                    </div>
+                    <h6 class="text-muted mb-2">No upcoming appointments</h6>
+                    <p class="text-muted small mb-3">You have no appointments scheduled for the next 7 days.</p>
+                    <button class="btn btn-warning btn-sm">
+                        <i class="bi bi-calendar-plus me-1"></i>
+                        Schedule Appointment
+                    </button>
+                </div>
+
+                <!-- Appointments Table (Hidden by default, show when there are appointments) -->
+                <div class="upcoming-table d-none">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Date & Time</th>
+                                    <th>Patient</th>
+                                    <th>Type</th>
+                                    <th>Contact</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Single Row Example -->
+                                <tr>
+                                    <td>
+                                        <div class="date-cell">
+                                            <span class="date-day">Tue</span>
+                                            <span class="date-number">25</span>
+                                            <span class="date-month">Nov</span>
+                                            <span class="date-time">10:00 AM</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="patient-cell">
+                                            <div class="patient-avatar">
+                                                <i class="bi bi-person-fill"></i>
+                                            </div>
+                                            <div>
+                                                <div class="patient-name">Emily Johnson</div>
+                                                <div class="patient-age text-muted small">32 years old</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="appointment-type">
+                                            <i class="bi bi-heart-pulse-fill me-1"></i>
+                                            Cardiology Checkup
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <div class="contact-cell">
+                                            <span class="contact-item">
+                                                <i class="bi bi-telephone-fill me-1"></i>
+                                                +1 234 567 8900
+                                            </span>
+                                            <span class="contact-item">
+                                                <i class="bi bi-envelope-fill me-1"></i>
+                                                emily@email.com
+                                            </span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-success-subtle text-success">
+                                            <i class="bi bi-check-circle-fill me-1"></i>
+                                            Confirmed
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="btn btn-sm btn-outline-primary" title="View Details">
+                                                <i class="bi bi-eye"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-secondary" title="Edit">
+                                                <i class="bi bi-pencil"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-danger" title="Cancel">
+                                                <i class="bi bi-x-circle"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <!-- Another Row Example -->
+                                <tr>
+                                    <td>
+                                        <div class="date-cell">
+                                            <span class="date-day">Wed</span>
+                                            <span class="date-number">26</span>
+                                            <span class="date-month">Nov</span>
+                                            <span class="date-time">02:30 PM</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="patient-cell">
+                                            <div class="patient-avatar">
+                                                <i class="bi bi-person-fill"></i>
+                                            </div>
+                                            <div>
+                                                <div class="patient-name">Michael Brown</div>
+                                                <div class="patient-age text-muted small">45 years old</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="appointment-type">
+                                            <i class="bi bi-clipboard2-pulse-fill me-1"></i>
+                                            Follow-up
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <div class="contact-cell">
+                                            <span class="contact-item">
+                                                <i class="bi bi-telephone-fill me-1"></i>
+                                                +1 234 567 8901
+                                            </span>
+                                            <span class="contact-item">
+                                                <i class="bi bi-envelope-fill me-1"></i>
+                                                michael@email.com
+                                            </span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-warning-subtle text-warning">
+                                            <i class="bi bi-clock-fill me-1"></i>
+                                            Pending
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="btn btn-sm btn-outline-primary" title="View Details">
+                                                <i class="bi bi-eye"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-secondary" title="Edit">
+                                                <i class="bi bi-pencil"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-danger" title="Cancel">
+                                                <i class="bi bi-x-circle"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <!-- Third Row Example -->
+                                <tr>
+                                    <td>
+                                        <div class="date-cell">
+                                            <span class="date-day">Fri</span>
+                                            <span class="date-number">28</span>
+                                            <span class="date-month">Nov</span>
+                                            <span class="date-time">11:15 AM</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="patient-cell">
+                                            <div class="patient-avatar">
+                                                <i class="bi bi-person-fill"></i>
+                                            </div>
+                                            <div>
+                                                <div class="patient-name">Sarah Williams</div>
+                                                <div class="patient-age text-muted small">28 years old</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="appointment-type">
+                                            <i class="bi bi-file-medical-fill me-1"></i>
+                                            Initial Consultation
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <div class="contact-cell">
+                                            <span class="contact-item">
+                                                <i class="bi bi-telephone-fill me-1"></i>
+                                                +1 234 567 8902
+                                            </span>
+                                            <span class="contact-item">
+                                                <i class="bi bi-envelope-fill me-1"></i>
+                                                sarah@email.com
+                                            </span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-success-subtle text-success">
+                                            <i class="bi bi-check-circle-fill me-1"></i>
+                                            Confirmed
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="btn btn-sm btn-outline-primary" title="View Details">
+                                                <i class="bi bi-eye"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-secondary" title="Edit">
+                                                <i class="bi bi-pencil"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-danger" title="Cancel">
+                                                <i class="bi bi-x-circle"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="table-footer d-flex justify-content-between align-items-center mt-3">
+                        <div class="text-muted small">
+                            Showing <strong>1-3</strong> of <strong>3</strong> appointments
+                        </div>
+                        <nav>
+                            <ul class="pagination pagination-sm mb-0">
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#" tabindex="-1">Previous</a>
+                                </li>
+                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">Next</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

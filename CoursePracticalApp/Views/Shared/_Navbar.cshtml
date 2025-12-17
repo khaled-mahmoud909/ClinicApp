@@ -1,0 +1,78 @@
+﻿<nav class="navbar navbar-light bg-white border-bottom">
+    <div class="container-fluid px-4 py-2">
+        <!-- Left Side: User Info -->
+        <div class="navbar-user-info">
+            <div class="user-avatar-navbar">
+                <i class="fas fa-user"></i>
+            </div>
+            <div class="user-details">
+                <div class="user-name">@User.GetFormattedName()</div>
+                <div class="user-role">@User.GetUserRole()</div>
+            </div>
+        </div>
+
+        <!-- Right Side: Actions -->
+        <div class="navbar-actions">
+            <!-- Notifications -->
+            <div class="navbar-notification-wrapper me-3">
+                <button class="navbar-icon-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge">3</span>
+                </button>
+                <!-- Notification Dropdown -->
+                <div class="dropdown-menu dropdown-menu-end notification-dropdown">
+                    <div class="notification-header">
+                        <h6 class="mb-0">Notifications</h6>
+                        <span class="badge bg-primary-subtle text-primary">3 New</span>
+                    </div>
+                    <div class="notification-body">
+                        <a href="#" class="notification-item unread">
+                            <div class="notification-icon bg-success-subtle">
+                                <i class="bi bi-calendar-check text-success"></i>
+                            </div>
+                            <div class="notification-content">
+                                <div class="notification-title">New Appointment</div>
+                                <div class="notification-text">Patient John Doe scheduled for 3:00 PM</div>
+                                <div class="notification-time">5 minutes ago</div>
+                            </div>
+                        </a>
+                        <a href="#" class="notification-item unread">
+                            <div class="notification-icon bg-warning-subtle">
+                                <i class="bi bi-clock text-warning"></i>
+                            </div>
+                            <div class="notification-content">
+                                <div class="notification-title">Appointment Reminder</div>
+                                <div class="notification-text">Upcoming appointment in 30 minutes</div>
+                                <div class="notification-time">25 minutes ago</div>
+                            </div>
+                        </a>
+                        <a href="#" class="notification-item">
+                            <div class="notification-icon bg-info-subtle">
+                                <i class="bi bi-info-circle text-info"></i>
+                            </div>
+                            <div class="notification-content">
+                                <div class="notification-title">System Update</div>
+                                <div class="notification-text">New features are now available</div>
+                                <div class="notification-time">2 hours ago</div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="notification-footer">
+                        <a href="#">View all notifications</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings (Optional) -->
+            <button class="navbar-icon-btn me-3 d-none d-lg-flex" type="button" title="Settings">
+                <i class="bi bi-gear"></i>
+            </button>
+
+            <!-- Logout -->
+            <a asp-controller="Auth" asp-action="Logout" class="navbar-logout-btn" title="Logout">
+                <i class="fas fa-sign-out-alt"></i>
+                <span class="d-none d-lg-inline ms-2">Logout</span>
+            </a>
+        </div>
+    </div>
+</nav>

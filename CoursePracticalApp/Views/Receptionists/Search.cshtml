@@ -1,0 +1,262 @@
+﻿@model SearchVM
+
+<div class="container-fluid">
+    <!-- Header -->
+    <div class="page-header mb-4">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <h4 class="mb-2 fw-bold">Search & Explore</h4>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a asp-action="Dashboard">Dashboard</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Search</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+   <partial name="_Filter" model="Model.Filter" />
+
+    <!-- Results Section with Tabs -->
+    <div class="row">
+        <div class="col-12">
+            <div class="results-card">
+                <!-- Modern Tabs -->
+                <div class="modern-tabs-wrapper">
+                    <ul class="nav modern-tabs" id="searchTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active"
+                                    id="appointments-tab"
+                                    data-bs-toggle="tab"
+                                    data-bs-target="#appointments"
+                                    type="button"
+                                    role="tab">
+                                <div class="tab-icon">
+                                    <i class="bi bi-calendar-check"></i>
+                                </div>
+                                <div class="tab-content-wrapper">
+                                    <span class="tab-title">Appointments</span>
+                                    <span class="tab-count">@Model.VMs.Count</span>
+                                </div>
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link"
+                                    id="patients-tab"
+                                    data-bs-toggle="tab"
+                                    data-bs-target="#patients"
+                                    type="button"
+                                    role="tab">
+                                <div class="tab-icon">
+                                    <i class="bi bi-people"></i>
+                                </div>
+                                <div class="tab-content-wrapper">
+                                    <span class="tab-title">Patients</span>
+                                    <span class="tab-count">@Model.PatientVMs.Count</span>
+                                </div>
+                            </button>
+                        </li>
+                    </ul>
+
+                    <div class="results-toolbar">
+                        <div class="view-options">
+                            <button class="view-btn active" data-view="card">
+                                <i class="bi bi-grid-3x3"></i>
+                            </button>
+                            <button class="view-btn" data-view="list">
+                                <i class="bi bi-list-ul"></i>
+                            </button>
+                        </div>
+                        <div class="sort-dropdown">
+                            <select class="form-select form-select-sm">
+                                <option>Sort by: Relevance</option>
+                                <option>Sort by: Date</option>
+                                <option>Sort by: Name</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab Content -->
+                <div class="tab-content modern-tab-content" id="searchTabsContent">
+
+                    <!-- Appointments Tab -->
+                    <div class="tab-pane fade show active view-mode-card" id="appointments" role="tabpanel">
+                        
+                        @if(Model.VMs.Count == 0)
+                        {
+                            <!-- Empty State -->
+                            <div class="modern-empty-state">
+                                <div class="empty-state-illustration">
+                                    <div class="empty-state-circle">
+                                        <i class="bi bi-search"></i>
+                                    </div>
+                                </div>
+                                <h5 class="empty-state-title">Start Your Search</h5>
+                                <p class="empty-state-text">Enter keywords in the search bar above to find appointments</p>
+                                <div class="empty-state-suggestions">
+                                    <span class="suggestion-label">Try searching for:</span>
+                                    <button class="suggestion-chip">Dr. Smith</button>
+                                    <button class="suggestion-chip">Today's appointments</button>
+                                    <button class="suggestion-chip">Patient ID</button>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <partial name="_AppointmentCard" model="Model.VMs" />
+                            <partial name="_AppointmentList" model="Model.VMs" />
+                        }
+                        <!-- Pagination -->
+                        <div class="modern-pagination">
+                            <partial name="_Pagination" />
+                        </div>
+                    </div>
+
+                    <!-- Patients Tab -->
+                    <div class="tab-pane fade view-mode-card" id="patients" role="tabpanel">
+
+                        @if (Model.PatientVMs.Count == 0)
+                        {
+                            <!-- Empty State -->
+                            <div class="modern-empty-state">
+                                <div class="empty-state-illustration">
+                                    <div class="empty-state-circle">
+                                        <i class="bi bi-people"></i>
+                                    </div>
+                                </div>
+                                <h5 class="empty-state-title">Find Patient Records</h5>
+                                <p class="empty-state-text">Search for patient information using name, ID, or contact details</p>
+                                <div class="empty-state-suggestions">
+                                    <span class="suggestion-label">Quick search:</span>
+                                    <button class="suggestion-chip">Recent patients</button>
+                                    <button class="suggestion-chip">Active patients</button>
+                                    <button class="suggestion-chip">By phone number</button>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <partial name="_PatientCard" model="Model.PatientVMs" />
+                            <partial name="_PatientList" model="Model.PatientVMs" />
+                        }
+                        <!-- Pagination -->
+                        <div class="modern-pagination">
+                            <partial name="_Pagination" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+
+        // document.querySelector('#globalSearch').addEventListener('input', function() {
+        //     let timeOut;
+        //     clearTimeout(timeOut);
+
+        //     timeOut = setTimeout(() => {
+        //         const query = this.value.trim();
+        //         if(query.length >= 3) {
+
+        //             const activeTab = document.querySelector('.nav-link.active');
+        //             if(activeTab.id === 'appointments-tab') {
+        //                 const appointmentResults = document.querySelector('#appointmentResults');
+        //                 const appointmentEmpty = AbortController.querySelector('#appointments .modern-empty-state');
+
+        //                 appointmentResults.classList.remove('d-none');
+
+        //                 $.ajax({
+        //                     url: '/api/search/appointments',
+        //                     method: 'GET',
+        //                     data: { q: query },
+        //                     success: function(data) {
+        //                         // Populate appointmentResults with data
+        //                     }
+        //                 });})
+                        
+        //             } else if(activeTab.id === 'patients-tab') {
+        //                 // Simulate search results for patients
+        //                 document.querySelector('#patientResults').classList.remove('d-none');
+        //                 const emptyState = document.querySelector('#patients .modern-empty-state');
+        //                 if (emptyState) {
+        //                     emptyState.classList.add('d-none');
+        //                 }
+   
+        //         }
+        //     }, 500); // 500ms debounce
+        // });
+
+        // Toggle between empty state and results
+        document.querySelector('.search-btn-enhanced').addEventListener('click', function() {
+            const activeTab = document.querySelector('.tab-pane.active');
+            const emptyState = activeTab.querySelector('.modern-empty-state');
+            const resultsList = activeTab.querySelector('.modern-results-list');
+                if (emptyState) {
+                emptyState.classList.add('d-none');
+            }
+            if (resultsList) {
+                resultsList.classList.remove('d-none');
+            }
+        });
+
+        // Filter chips functionality
+        document.querySelectorAll('.filter-chip-modern').forEach(chip => {
+            chip.addEventListener('click', function() {
+                document.querySelectorAll('.filter-chip-modern').forEach(c => c.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // View options
+        document.querySelectorAll('.view-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+
+                const viewMode = this.dataset.view;
+
+                const activeTabPane = document.querySelector('.tab-pane.active');
+                if(activeTabPane) {
+                    if(viewMode === 'list') {
+                        activeTabPane.classList.remove('view-mode-card');
+                        activeTabPane.classList.add('view-mode-list');
+                    } else {
+                        activeTabPane.classList.remove('view-mode-list');
+                        activeTabPane.classList.add('view-mode-card');
+                    }
+                }
+            });
+        });
+
+        document.querySelectorAll('[data-bs-toggle="tab"]').forEach(tab => {
+            tab.addEventListener('shown.bs.tab', function(e) {
+                const activeViewBtn = document.querySelector('.view-btn.active');
+                const viewMode = activeViewBtn ? activeViewBtn.dataset.view : 'card';
+
+                const newTabPane = document.querySelector(this.dataset.bsTarget);
+                if (newTabPane) {
+                    if (viewMode === 'list') {
+                        newTabPane.classList.remove('view-mode-card');
+                        newTabPane.classList.add('view-mode-list');
+                    } else {
+                        newTabPane.classList.remove('view-mode-list');
+                        newTabPane.classList.add('view-mode-card');
+                    }
+                }
+            });
+        });
+
+        // Suggestion chips
+        document.querySelectorAll('.suggestion-chip').forEach(chip => {
+            chip.addEventListener('click', function() {
+                document.getElementById('globalSearch').value = this.textContent;
+                document.querySelector('.search-btn-enhanced').click();
+            });
+        });
+    </script>
+}
